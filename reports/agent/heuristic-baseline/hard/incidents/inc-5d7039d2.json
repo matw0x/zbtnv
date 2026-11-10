@@ -1,0 +1,144 @@
+{
+  "incident_id": "inc-5d7039d2",
+  "model": "heuristic-baseline",
+  "outcome": "completed",
+  "turns": 3,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cached_input_tokens": 0
+  },
+  "wall_seconds": 0.05,
+  "signal": {
+    "signal_id": "sig-e851c851b3",
+    "service": "catalog",
+    "window": [
+      "2026-11-02T13:04:10+00:00",
+      "2026-11-02T13:04:20+00:00"
+    ],
+    "anomaly_score": 0.0,
+    "threshold": -0.6365,
+    "correlated_services": [
+      "gateway",
+      "inventory",
+      "orders"
+    ],
+    "top_deviations": [
+      {
+        "feature": "server_error_rate",
+        "value": 0.527,
+        "baseline_median": 0.0,
+        "robust_z": 50.0
+      },
+      {
+        "feature": "latency_p95_ms",
+        "value": 1033.8467,
+        "baseline_median": 53.0802,
+        "robust_z": 18.21
+      },
+      {
+        "feature": "latency_p50_ms",
+        "value": 221.0181,
+        "baseline_median": 25.4045,
+        "robust_z": 16.76
+      },
+      {
+        "feature": "users_per_client",
+        "value": 0.1443,
+        "baseline_median": 1.0,
+        "robust_z": -11.17
+      },
+      {
+        "feature": "bytes_per_response",
+        "value": 4751.701,
+        "baseline_median": 11159.4211,
+        "robust_z": -8.54
+      }
+    ]
+  },
+  "classification": {
+    "incident_type": "benign",
+    "confidence": 0.6,
+    "affected_services": [
+      "catalog"
+    ],
+    "summary": "Heuristic triage of catalog: benign. request rate x3.7, server errors 37.4%",
+    "evidence": [
+      "request rate x3.7, server errors 37.4%"
+    ]
+  },
+  "revisions": [],
+  "blocked": [],
+  "isolated": [],
+  "denied": [],
+  "notifications": [
+    "low"
+  ],
+  "final_text": "Investigation finished.",
+  "error": null,
+  "audit": [
+    {
+      "at": "2026-11-02T13:04:22.171926+00:00",
+      "tool": "service_health",
+      "arguments": {
+        "service": "catalog",
+        "lookback_seconds": 600,
+        "bucket_seconds": 30
+      },
+      "ok": true,
+      "result": "{\"service\":\"catalog\",\"baseline\":{\"requests_per_s\":6.9,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":53.1,\"bytes_per_response\":11159},\"series\":[{\"t\":\"12:59:52\",\"requests_per_s\":7.17,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":68.3,\"mb_out\":2.45},{\"t\":\"13:00:22\",\"requests_per_s\":10.33,\"server_error_rate\":0.003,\"auth_failure_rate\":0.0,\"p95_ms\":73.7,\"mb_out\":3.44},{\"t\":\"13:00:52\",\"requests_per_s\":9.6,\"server_error_rate\":0.007,\"auth_failure_rate\":0.0,\"p95_ms\":86.0,\"mb_out\":3.2},{\"t\":\"13:01:22\",\"requests_per_s\":10.77,\"server_error_rate\":0.003,\"auth_failure_rate\":0.0,\"p95_ms\":71.6,\"mb_out\":3.71},{\"t\":\"13:01:52\",\"requests_per_s\":11.37,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":72.0,\"mb_out\":4.15},{\"t\":\"13:02:22\",\"requests_per_s\":10.17,\"server_error_rate\":0.01,\"auth_failure_rate\":0.0,\"p95_ms\":74.5,\"mb_out\":3.49},{\"t\":\"13:02:52\",\"requests_per_s\":10.33,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":64.7,\"mb_out\":3.53},{\"t\":\"13:03:22\",\"requests_per_s\":9.4,\"server_error_rate\":0.004,\"auth_failure_rate\":0.0,\"p95_ms\":62.4,\"mb_out\":3.35},{\"t\":\"13:03:52\",\"requests_per_s\":25.73,\"server_error_rate\":0.374,\"auth_failure_rate\":0.0,\"p95_ms\":1002.9,\"mb_out\":5.0}],\"top_error_messages\":[{\"message\":\"load shedding: catalog concurrency limit reached\",\"count\":227},{\"message\":\"dependency inventory failed with 503\",\"count\":62},{\"message\":\"resource not found\",\"count\":15},{\"message\":\"validation failed\",\"count\":13},{\"message\":\"unhandled exception: connection reset by peer\",\"count\":6}]}"
+    },
+    {
+      "at": "2026-11-02T13:04:22.171926+00:00",
+      "tool": "top_clients",
+      "arguments": {
+        "service": "catalog",
+        "lookback_seconds": 120,
+        "rank_by": "errors",
+        "limit": 50
+      },
+      "ok": true,
+      "result": "{\"service\":\"catalog\",\"total_requests\":1669,\"distinct_clients\":708,\"clients_new_in_window\":312,\"clients\":[{\"ip\":\"93.80.65.156\",\"requests\":26,\"share\":0.0156,\"error_rate\":0.192,\"auth_failures\":0,\"bytes\":196775,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/products/{id}\"},{\"ip\":\"109.252.214.44\",\"requests\":34,\"share\":0.0204,\"error_rate\":0.118,\"auth_failures\":0,\"bytes\":367511,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/products/search\"},{\"ip\":\"188.162.42.245\",\"requests\":11,\"share\":0.0066,\"error_rate\":0.364,\"auth_failures\":0,\"bytes\":64474,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/products/{id}\"},{\"ip\":\"89.113.175.225\",\"requests\":10,\"share\":0.006,\"error_rate\":0.4,\"auth_failures\":0,\"bytes\":61404,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/products/search\"},{\"ip\":\"79.139.225.233\",\"requests\":8,\"share\":0.0048,\"error_rate\":0.5,\"auth_failures\":0,\"bytes\":53262,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/products/search\"},{\"ip\":\"37.112.24.22\",\"requests\":75,\"share\":0.0449,\"error_rate\":0.04,\"auth_failures\":0,\"bytes\":897705,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/products/search\"},{\"ip\":\"176.59.206.186\",\"requests\":20,\"share\":0.012,\"error_rate\":0.15,\"auth_failures\":0,\"bytes\":250162,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/products/search\"},{\"ip\":\"91.77.246.231\",\"requests\":6,\"share\":0.0036,\"error_rate\":0.5,\"auth_failures\":0,\"bytes\":61745,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"GET /v1/products/search\"},{\"ip\":\"178.66.189.135\",\"requests\":8,\"share\":0.0048,\"error_rate\":0.375,\"auth_failures\":0,\"bytes\":47647,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/products/{id}\"},{\"ip\":\"91.77.242.234\",\"requests\":6,\"share\":0.0036,\"error_rate\":0.5,\"auth_failures\":0,\"bytes\":84230,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/products/search\"},{\"ip\":\"78.106.45.69\",\"requests\":5,\"share\":0.003,\"error_rate\":0.6,\"auth_failures\":0,\"bytes\":28075,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"GET /v1/products/{id}\"},{\"ip\":\"109.252.102.228\",\"requests\":4,\"share\":0.0024,\"error_rate\":0.75,\"auth_failures\":0,\"bytes\":3157,\"distinct_users\":0,\"seen_before\":true,\"top_request\":\"GET /v1/products/{id}\"},{\"ip\":\"37.112.33.250\",\"requests\":3,\"share\":0.0018,\"error_rate\":1.0,\"auth_failures\":0,\"bytes\":463,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/products/search\"},{\"ip\":\"78.106.172.15\",\"requests\":5,\"share\":0.003,\"error_rate\":0.4,\"auth_failures\":0,\"bytes\":34166,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/products/search\"},{\"ip\":\"37.112.223.8\",\"requests\":13,\"share\":0.0078,\"error_rate\":0.154,\"auth_failures\":0,\"bytes\":173089,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/products/search\"},{\"ip\":\"79.139.218.17\",\"requests\":4,\"share\":0.0024,\"error_rate\":0.5,\"auth_failures\":0,\"bytes\":11888,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/products/{id}\"},{\"ip\":\"79.139.84.45\",\"requests\":9,\"share\":0.0054,\"error_rate\":0.222,\"auth_failures\":0,\"bytes\":82907,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/products/{id}\"},{\"ip\":\"188.162.125.169\",\"requests\":10,\"share\":0.006,\"error_rate\":0.2,\"auth_failures\":0,\"bytes\":75693,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/products/{id}\"},{\"ip\":\"46.39.201.211\",\"requests\":6,\"share\":0.0036,\"error_rate\":0.333,\"auth_failures\":0,\"bytes\":44796,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/products/search\"},{\"ip\":\"109.252.66.176\",\"requests\":3,\"share\":0.0018,\"error_rate\":0.667,\"auth_failures\":0,\"bytes\":5672,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/products/{id}\"},{\"ip\":\"109.252.234.205\",\"requests\":5,\"share\":0.003,\"error_rate\":0.4,\"auth_failures\":0,\"bytes\":22044,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/products/{id}\"},{\"ip\":\"109.252.203.152\",\"requests\":9,\"share\":0.0054,\"error_rate\":0.222,\"auth_failures\":0,\"bytes\":53382,\"distinct_users\":1,\"seen_before\":true,\"top"
+    },
+    {
+      "at": "2026-11-02T13:04:22.171926+00:00",
+      "tool": "call_graph",
+      "arguments": {
+        "lookback_seconds": 300
+      },
+      "ok": true,
+      "result": "{\"edges\":[{\"edge\":\"gateway -> catalog\",\"calls\":3146,\"error_rate\":0.103,\"p95_ms\":531.6,\"mb\":32.31,\"novel_routes\":[]},{\"edge\":\"external -> gateway\",\"calls\":4789,\"error_rate\":0.106,\"p95_ms\":668.6,\"mb\":8.62,\"novel_routes\":[]},{\"edge\":\"gateway -> orders\",\"calls\":848,\"error_rate\":0.027,\"p95_ms\":822.1,\"mb\":3.53,\"novel_routes\":[]},{\"edge\":\"notifications -> egress:198.51.100.25\",\"calls\":364,\"error_rate\":0.014,\"p95_ms\":324.0,\"mb\":0.9,\"novel_routes\":[]},{\"edge\":\"gateway -> users\",\"calls\":411,\"error_rate\":0.01,\"p95_ms\":28.0,\"mb\":0.7,\"novel_routes\":[]},{\"edge\":\"payments -> egress:198.51.100.40\",\"calls\":364,\"error_rate\":0.014,\"p95_ms\":732.1,\"mb\":0.46,\"novel_routes\":[]},{\"edge\":\"gateway -> auth\",\"calls\":1458,\"error_rate\":0.024,\"p95_ms\":73.5,\"mb\":0.43,\"novel_routes\":[]},{\"edge\":\"catalog -> inventory\",\"calls\":1177,\"error_rate\":0.082,\"p95_ms\":133.5,\"mb\":0.39,\"novel_routes\":[]},{\"edge\":\"orders -> payments\",\"calls\":364,\"error_rate\":0.022,\"p95_ms\":849.2,\"mb\":0.25,\"novel_routes\":[]},{\"edge\":\"notifications -> users\",\"calls\":364,\"error_rate\":0.011,\"p95_ms\":22.0,\"mb\":0.21,\"novel_routes\":[]},{\"edge\":\"auth -> users\",\"calls\":199,\"error_rate\":0.01,\"p95_ms\":33.9,\"mb\":0.19,\"novel_routes\":[]},{\"edge\":\"orders -> inventory\",\"calls\":364,\"error_rate\":0.027,\"p95_ms\":51.3,\"mb\":0.16,\"novel_routes\":[]},{\"edge\":\"orders -> notifications\",\"calls\":364,\"error_rate\":0.025,\"p95_ms\":351.0,\"mb\":0.12,\"novel_routes\":[]}],\"novel_edges\":0}"
+    },
+    {
+      "at": "2026-11-02T13:04:22.171926+00:00",
+      "tool": "classify_incident",
+      "arguments": {
+        "incident_type": "benign",
+        "confidence": 0.6,
+        "affected_services": [
+          "catalog"
+        ],
+        "summary": "Heuristic triage of catalog: benign. request rate x3.7, server errors 37.4%",
+        "evidence": [
+          "request rate x3.7, server errors 37.4%"
+        ]
+      },
+      "ok": true,
+      "result": "{\"recorded\":true,\"incident_id\":\"inc-5d7039d2\",\"containment_permitted\":[],\"always_permitted\":[\"notify_admin\"]}"
+    },
+    {
+      "at": "2026-11-02T13:04:22.171926+00:00",
+      "tool": "notify_admin",
+      "arguments": {
+        "severity": "low",
+        "title": "benign on catalog",
+        "summary": "Heuristic triage of catalog: benign. request rate x3.7, server errors 37.4%",
+        "recommendations": [
+          "Validate the automated triage."
+        ]
+      },
+      "ok": true,
+      "result": "{\"delivered\":true,\"at\":\"2026-11-02T13:04:22.171926+00:00\"}"
+    }
+  ]
+}

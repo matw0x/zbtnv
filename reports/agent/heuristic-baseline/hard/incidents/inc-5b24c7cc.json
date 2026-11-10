@@ -1,0 +1,134 @@
+{
+  "incident_id": "inc-5b24c7cc",
+  "model": "heuristic-baseline",
+  "outcome": "completed",
+  "turns": 3,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cached_input_tokens": 0
+  },
+  "wall_seconds": 0.03,
+  "signal": {
+    "signal_id": "sig-55ad94055f",
+    "service": "inventory",
+    "window": [
+      "2026-11-02T13:04:10+00:00",
+      "2026-11-02T13:04:20+00:00"
+    ],
+    "anomaly_score": 0.0,
+    "threshold": -0.6365,
+    "correlated_services": [
+      "catalog"
+    ],
+    "top_deviations": [
+      {
+        "feature": "latency_p95_ms",
+        "value": 5000.0,
+        "baseline_median": 23.5618,
+        "robust_z": 23.55
+      },
+      {
+        "feature": "server_error_rate",
+        "value": 0.1961,
+        "baseline_median": 0.0,
+        "robust_z": 19.61
+      },
+      {
+        "feature": "latency_p50_ms",
+        "value": 66.3154,
+        "baseline_median": 7.2027,
+        "robust_z": 13.0
+      }
+    ]
+  },
+  "classification": {
+    "incident_type": "software_fault",
+    "confidence": 0.75,
+    "affected_services": [
+      "inventory"
+    ],
+    "summary": "Heuristic triage of inventory: software_fault. server error rate 13% at normal volume; resource not found; upstream timeout after 5000ms in inventory GET /v1/stock/{id}",
+    "evidence": [
+      "server error rate 13% at normal volume",
+      "resource not found",
+      "upstream timeout after 5000ms in inventory GET /v1/stock/{id}"
+    ]
+  },
+  "revisions": [],
+  "blocked": [],
+  "isolated": [],
+  "denied": [],
+  "notifications": [
+    "high"
+  ],
+  "final_text": "Investigation finished.",
+  "error": null,
+  "audit": [
+    {
+      "at": "2026-11-02T13:04:22.001188+00:00",
+      "tool": "service_health",
+      "arguments": {
+        "service": "inventory",
+        "lookback_seconds": 600,
+        "bucket_seconds": 30
+      },
+      "ok": true,
+      "result": "{\"service\":\"inventory\",\"baseline\":{\"requests_per_s\":3.9,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":23.6,\"bytes_per_response\":368},\"series\":[{\"t\":\"12:59:52\",\"requests_per_s\":3.53,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":26.3,\"mb_out\":0.04},{\"t\":\"13:00:22\",\"requests_per_s\":5.03,\"server_error_rate\":0.007,\"auth_failure_rate\":0.0,\"p95_ms\":30.2,\"mb_out\":0.05},{\"t\":\"13:00:52\",\"requests_per_s\":5.83,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":33.8,\"mb_out\":0.07},{\"t\":\"13:01:22\",\"requests_per_s\":5.9,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":31.2,\"mb_out\":0.06},{\"t\":\"13:01:52\",\"requests_per_s\":5.5,\"server_error_rate\":0.006,\"auth_failure_rate\":0.0,\"p95_ms\":27.7,\"mb_out\":0.06},{\"t\":\"13:02:22\",\"requests_per_s\":4.57,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":25.4,\"mb_out\":0.05},{\"t\":\"13:02:52\",\"requests_per_s\":4.87,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":32.5,\"mb_out\":0.06},{\"t\":\"13:03:22\",\"requests_per_s\":4.73,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":28.2,\"mb_out\":0.05},{\"t\":\"13:03:52\",\"requests_per_s\":4.73,\"server_error_rate\":0.127,\"auth_failure_rate\":0.0,\"p95_ms\":5000.0,\"mb_out\":0.05}],\"top_error_messages\":[{\"message\":\"resource not found\",\"count\":13},{\"message\":\"upstream timeout after 5000ms in inventory GET /v1/stock/{id}\",\"count\":12},{\"message\":\"validation failed\",\"count\":9},{\"message\":\"upstream timeout after 5000ms in inventory POST /v1/reservations\",\"count\":4},{\"message\":\"unhandled exception: connection reset by peer\",\"count\":2}]}"
+    },
+    {
+      "at": "2026-11-02T13:04:22.001188+00:00",
+      "tool": "top_clients",
+      "arguments": {
+        "service": "inventory",
+        "lookback_seconds": 120,
+        "rank_by": "errors",
+        "limit": 50
+      },
+      "ok": true,
+      "result": "{\"service\":\"inventory\",\"total_requests\":567,\"distinct_clients\":329,\"clients_new_in_window\":189,\"clients\":[{\"ip\":\"89.113.152.140\",\"requests\":25,\"share\":0.0441,\"error_rate\":0.12,\"auth_failures\":0,\"bytes\":8546,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/stock/{id}\"},{\"ip\":\"85.140.15.141\",\"requests\":1,\"share\":0.0018,\"error_rate\":1.0,\"auth_failures\":0,\"bytes\":215,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/stock/{id}\"},{\"ip\":\"91.77.122.153\",\"requests\":5,\"share\":0.0088,\"error_rate\":0.2,\"auth_failures\":0,\"bytes\":1836,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/stock/{id}\"},{\"ip\":\"212.164.161.149\",\"requests\":16,\"share\":0.0282,\"error_rate\":0.062,\"auth_failures\":0,\"bytes\":6109,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/reservations\"},{\"ip\":\"178.66.148.13\",\"requests\":3,\"share\":0.0053,\"error_rate\":0.333,\"auth_failures\":0,\"bytes\":1501,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/reservations\"},{\"ip\":\"91.77.161.117\",\"requests\":1,\"share\":0.0018,\"error_rate\":1.0,\"auth_failures\":0,\"bytes\":126,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/stock/{id}\"},{\"ip\":\"109.252.201.76\",\"requests\":2,\"share\":0.0035,\"error_rate\":0.5,\"auth_failures\":0,\"bytes\":465,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/stock/{id}\"},{\"ip\":\"93.80.114.96\",\"requests\":2,\"share\":0.0035,\"error_rate\":0.5,\"auth_failures\":0,\"bytes\":660,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"GET /v1/stock/{id}\"},{\"ip\":\"178.66.197.107\",\"requests\":3,\"share\":0.0053,\"error_rate\":0.333,\"auth_failures\":0,\"bytes\":1558,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/reservations\"},{\"ip\":\"77.37.90.136\",\"requests\":2,\"share\":0.0035,\"error_rate\":0.5,\"auth_failures\":0,\"bytes\":975,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/reservations\"},{\"ip\":\"91.77.73.32\",\"requests\":3,\"share\":0.0053,\"error_rate\":0.333,\"auth_failures\":0,\"bytes\":609,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/stock/{id}\"},{\"ip\":\"79.139.73.78\",\"requests\":2,\"share\":0.0035,\"error_rate\":0.5,\"auth_failures\":0,\"bytes\":362,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"GET /v1/stock/{id}\"},{\"ip\":\"79.139.21.87\",\"requests\":2,\"share\":0.0035,\"error_rate\":0.5,\"auth_failures\":0,\"bytes\":372,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/stock/{id}\"},{\"ip\":\"91.77.227.39\",\"requests\":1,\"share\":0.0018,\"error_rate\":1.0,\"auth_failures\":0,\"bytes\":197,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/reservations\"},{\"ip\":\"95.24.162.89\",\"requests\":1,\"share\":0.0018,\"error_rate\":1.0,\"auth_failures\":0,\"bytes\":173,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/reservations\"},{\"ip\":\"91.77.22.28\",\"requests\":1,\"share\":0.0018,\"error_rate\":1.0,\"auth_failures\":0,\"bytes\":158,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"GET /v1/stock/{id}\"},{\"ip\":\"178.66.220.80\",\"requests\":1,\"share\":0.0018,\"error_rate\":1.0,\"auth_failures\":0,\"bytes\":190,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"GET /v1/stock/{id}\"},{\"ip\":\"95.24.52.231\",\"requests\":1,\"share\":0.0018,\"error_rate\":1.0,\"auth_failures\":0,\"bytes\":155,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"GET /v1/stock/{id}\"},{\"ip\":\"79.139.146.46\",\"requests\":1,\"share\":0.0018,\"error_rate\":1.0,\"auth_failures\":0,\"bytes\":125,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"GET /v1/stock/{id}\"},{\"ip\":\"85.140.197.156\",\"requests\":1,\"share\":0.0018,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":364,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"GET /v1/stock/{id}\"},{\"ip\":\"93.80.71.252\",\"requests\":1,\"share\":0.0018,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":399,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/reservations\"},{\"ip\":\"93.80.108.130\",\"requests\":5,\"share\":0.0088,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":1529,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/stock/{id}\"},{\"ip\":\"95.24.160.110\",\"requests\":1,\"share\":0.0018,\"error_rate\":0.0,\"auth_failures\":0,\"by"
+    },
+    {
+      "at": "2026-11-02T13:04:22.001188+00:00",
+      "tool": "call_graph",
+      "arguments": {
+        "lookback_seconds": 300
+      },
+      "ok": true,
+      "result": "{\"edges\":[{\"edge\":\"gateway -> catalog\",\"calls\":2407,\"error_rate\":0.016,\"p95_ms\":66.8,\"mb\":27.13,\"novel_routes\":[]},{\"edge\":\"external -> gateway\",\"calls\":3862,\"error_rate\":0.022,\"p95_ms\":560.7,\"mb\":7.63,\"novel_routes\":[]},{\"edge\":\"gateway -> orders\",\"calls\":861,\"error_rate\":0.022,\"p95_ms\":1000.2,\"mb\":3.42,\"novel_routes\":[]},{\"edge\":\"notifications -> egress:198.51.100.25\",\"calls\":394,\"error_rate\":0.01,\"p95_ms\":374.6,\"mb\":0.95,\"novel_routes\":[]},{\"edge\":\"gateway -> users\",\"calls\":376,\"error_rate\":0.011,\"p95_ms\":16.2,\"mb\":0.65,\"novel_routes\":[]},{\"edge\":\"payments -> egress:198.51.100.40\",\"calls\":396,\"error_rate\":0.005,\"p95_ms\":738.5,\"mb\":0.5,\"novel_routes\":[]},{\"edge\":\"gateway -> auth\",\"calls\":1449,\"error_rate\":0.026,\"p95_ms\":64.2,\"mb\":0.43,\"novel_routes\":[]},{\"edge\":\"catalog -> inventory\",\"calls\":945,\"error_rate\":0.033,\"p95_ms\":35.0,\"mb\":0.32,\"novel_routes\":[]},{\"edge\":\"orders -> payments\",\"calls\":396,\"error_rate\":0.015,\"p95_ms\":882.5,\"mb\":0.27,\"novel_routes\":[]},{\"edge\":\"notifications -> users\",\"calls\":394,\"error_rate\":0.015,\"p95_ms\":16.5,\"mb\":0.22,\"novel_routes\":[]},{\"edge\":\"auth -> users\",\"calls\":211,\"error_rate\":0.028,\"p95_ms\":17.8,\"mb\":0.2,\"novel_routes\":[]},{\"edge\":\"orders -> inventory\",\"calls\":396,\"error_rate\":0.028,\"p95_ms\":101.8,\"mb\":0.17,\"novel_routes\":[]},{\"edge\":\"orders -> notifications\",\"calls\":396,\"error_rate\":0.013,\"p95_ms\":404.2,\"mb\":0.13,\"novel_routes\":[]}],\"novel_edges\":0}"
+    },
+    {
+      "at": "2026-11-02T13:04:22.001188+00:00",
+      "tool": "classify_incident",
+      "arguments": {
+        "incident_type": "software_fault",
+        "confidence": 0.75,
+        "affected_services": [
+          "inventory"
+        ],
+        "summary": "Heuristic triage of inventory: software_fault. server error rate 13% at normal volume; resource not found; upstream timeout after 5000ms in inventory GET /v1/stock/{id}",
+        "evidence": [
+          "server error rate 13% at normal volume",
+          "resource not found",
+          "upstream timeout after 5000ms in inventory GET /v1/stock/{id}"
+        ]
+      },
+      "ok": true,
+      "result": "{\"recorded\":true,\"incident_id\":\"inc-5b24c7cc\",\"containment_permitted\":[],\"always_permitted\":[\"notify_admin\"]}"
+    },
+    {
+      "at": "2026-11-02T13:04:22.001188+00:00",
+      "tool": "notify_admin",
+      "arguments": {
+        "severity": "high",
+        "title": "software_fault on inventory",
+        "summary": "Heuristic triage of inventory: software_fault. server error rate 13% at normal volume; resource not found; upstream timeout after 5000ms in inventory GET /v1/stock/{id}",
+        "recommendations": [
+          "Validate the automated triage."
+        ]
+      },
+      "ok": true,
+      "result": "{\"delivered\":true,\"at\":\"2026-11-02T13:04:22.001188+00:00\"}"
+    }
+  ]
+}

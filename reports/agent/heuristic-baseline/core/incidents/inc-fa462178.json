@@ -1,0 +1,153 @@
+{
+  "incident_id": "inc-fa462178",
+  "model": "heuristic-baseline",
+  "outcome": "completed",
+  "turns": 3,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cached_input_tokens": 0
+  },
+  "wall_seconds": 0.02,
+  "signal": {
+    "signal_id": "sig-c74a67bd45",
+    "service": "notifications",
+    "window": [
+      "2026-11-02T13:04:10+00:00",
+      "2026-11-02T13:04:20+00:00"
+    ],
+    "anomaly_score": 0.0,
+    "threshold": -0.6365,
+    "correlated_services": [
+      "users"
+    ],
+    "top_deviations": [
+      {
+        "feature": "novel_route_ratio",
+        "value": 0.5714,
+        "baseline_median": 0.0,
+        "robust_z": 50.0
+      },
+      {
+        "feature": "outbound_bytes",
+        "value": 31042065.0,
+        "baseline_median": 33285.0,
+        "robust_z": 15.92
+      }
+    ]
+  },
+  "classification": {
+    "incident_type": "data_exfiltration",
+    "confidence": 0.8,
+    "affected_services": [
+      "notifications"
+    ],
+    "summary": "Heuristic triage of notifications: data_exfiltration. novel edge notifications -> users carrying 27.49 MB; novel edge notifications -> egress:203.0.113.77 carrying 27.29 MB",
+    "evidence": [
+      "novel edge notifications -> users carrying 27.49 MB",
+      "novel edge notifications -> egress:203.0.113.77 carrying 27.29 MB"
+    ]
+  },
+  "revisions": [],
+  "blocked": [
+    "203.0.113.77/32"
+  ],
+  "isolated": [
+    "notifications"
+  ],
+  "denied": [],
+  "notifications": [
+    "critical"
+  ],
+  "final_text": "Investigation finished.",
+  "error": null,
+  "audit": [
+    {
+      "at": "2026-11-02T13:04:22.564578+00:00",
+      "tool": "service_health",
+      "arguments": {
+        "service": "notifications",
+        "lookback_seconds": 600,
+        "bucket_seconds": 30
+      },
+      "ok": true,
+      "result": "{\"service\":\"notifications\",\"baseline\":{\"requests_per_s\":1.1,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":184.7,\"bytes_per_response\":332},\"series\":[{\"t\":\"12:59:52\",\"requests_per_s\":0.9,\"server_error_rate\":0.037,\"auth_failure_rate\":0.0,\"p95_ms\":186.9,\"mb_out\":0.01},{\"t\":\"13:00:22\",\"requests_per_s\":1.37,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":352.6,\"mb_out\":0.02},{\"t\":\"13:00:52\",\"requests_per_s\":1.27,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":274.0,\"mb_out\":0.01},{\"t\":\"13:01:22\",\"requests_per_s\":1.7,\"server_error_rate\":0.02,\"auth_failure_rate\":0.0,\"p95_ms\":272.0,\"mb_out\":0.02},{\"t\":\"13:01:52\",\"requests_per_s\":1.2,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":206.6,\"mb_out\":0.01},{\"t\":\"13:02:22\",\"requests_per_s\":1.17,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":363.1,\"mb_out\":0.01},{\"t\":\"13:02:52\",\"requests_per_s\":1.3,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":516.3,\"mb_out\":0.02},{\"t\":\"13:03:22\",\"requests_per_s\":1.6,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":234.9,\"mb_out\":0.02},{\"t\":\"13:03:52\",\"requests_per_s\":1.07,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":254.5,\"mb_out\":0.01}],\"top_error_messages\":[{\"message\":\"validation failed\",\"count\":2},{\"message\":\"resource not found\",\"count\":2},{\"message\":\"unhandled exception: connection reset by peer\",\"count\":1},{\"message\":\"dependency users failed with 500\",\"count\":1}]}"
+    },
+    {
+      "at": "2026-11-02T13:04:22.564578+00:00",
+      "tool": "top_clients",
+      "arguments": {
+        "service": "notifications",
+        "lookback_seconds": 120,
+        "rank_by": "errors",
+        "limit": 50
+      },
+      "ok": true,
+      "result": "{\"service\":\"notifications\",\"total_requests\":154,\"distinct_clients\":124,\"clients_new_in_window\":93,\"clients\":[{\"ip\":\"78.106.146.217\",\"requests\":6,\"share\":0.039,\"error_rate\":0.167,\"auth_failures\":0,\"bytes\":2448,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"37.112.49.44\",\"requests\":1,\"share\":0.0065,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":162,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"109.252.88.168\",\"requests\":1,\"share\":0.0065,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":331,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"93.80.245.239\",\"requests\":1,\"share\":0.0065,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":608,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"79.139.249.138\",\"requests\":1,\"share\":0.0065,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":326,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"85.140.79.51\",\"requests\":1,\"share\":0.0065,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":444,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"95.24.228.99\",\"requests\":1,\"share\":0.0065,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":447,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"31.173.179.115\",\"requests\":2,\"share\":0.013,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":844,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"85.140.25.125\",\"requests\":3,\"share\":0.0195,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":994,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"31.173.6.7\",\"requests\":1,\"share\":0.0065,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":292,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"77.37.189.142\",\"requests\":1,\"share\":0.0065,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":193,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"93.80.31.191\",\"requests\":1,\"share\":0.0065,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":353,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"46.39.17.34\",\"requests\":1,\"share\":0.0065,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":698,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"31.173.113.251\",\"requests\":1,\"share\":0.0065,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":742,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"109.252.60.174\",\"requests\":2,\"share\":0.013,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":299,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"77.37.48.162\",\"requests\":1,\"share\":0.0065,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":498,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"95.24.137.130\",\"requests\":1,\"share\":0.0065,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":390,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"79.139.202.146\",\"requests\":1,\"share\":0.0065,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":435,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"93.80.116.78\",\"requests\":1,\"share\":0.0065,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":390,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"176.59.111.156\",\"requests\":3,\"share\":0.0195,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":1067,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"178.66.212.182\",\"requests\":1,\"share\":0.0065,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":526,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"46.39.169.114\",\"requests\":2,\"share\":0.013,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":411,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"46.39.66.31\",\"requests\":6,\"share\":0.039,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":2797,\"distinct_users\":1,\"seen_before\":true,\"top_r"
+    },
+    {
+      "at": "2026-11-02T13:04:22.564578+00:00",
+      "tool": "call_graph",
+      "arguments": {
+        "lookback_seconds": 300
+      },
+      "ok": true,
+      "result": "{\"edges\":[{\"edge\":\"notifications -> users\",\"calls\":361,\"error_rate\":0.033,\"p95_ms\":17.5,\"mb\":27.49,\"novel_routes\":[\"GET /internal/admin/users\",\"GET /v1/users/export\"]},{\"edge\":\"notifications -> egress:203.0.113.77\",\"calls\":11,\"error_rate\":0.0,\"p95_ms\":1199.2,\"mb\":27.29,\"novel_routes\":[\"PUT /upload\"]},{\"edge\":\"gateway -> catalog\",\"calls\":2217,\"error_rate\":0.014,\"p95_ms\":61.8,\"mb\":24.85,\"novel_routes\":[]},{\"edge\":\"external -> gateway\",\"calls\":3553,\"error_rate\":0.019,\"p95_ms\":503.9,\"mb\":6.88,\"novel_routes\":[]},{\"edge\":\"gateway -> orders\",\"calls\":766,\"error_rate\":0.017,\"p95_ms\":781.8,\"mb\":3.13,\"novel_routes\":[]},{\"edge\":\"notifications -> egress:198.51.100.25\",\"calls\":346,\"error_rate\":0.023,\"p95_ms\":265.8,\"mb\":0.85,\"novel_routes\":[]},{\"edge\":\"gateway -> users\",\"calls\":365,\"error_rate\":0.019,\"p95_ms\":16.9,\"mb\":0.61,\"novel_routes\":[]},{\"edge\":\"payments -> egress:198.51.100.40\",\"calls\":346,\"error_rate\":0.012,\"p95_ms\":535.9,\"mb\":0.42,\"novel_routes\":[]},{\"edge\":\"gateway -> auth\",\"calls\":1326,\"error_rate\":0.025,\"p95_ms\":66.3,\"mb\":0.41,\"novel_routes\":[]},{\"edge\":\"catalog -> inventory\",\"calls\":824,\"error_rate\":0.018,\"p95_ms\":12.2,\"mb\":0.28,\"novel_routes\":[]},{\"edge\":\"orders -> payments\",\"calls\":347,\"error_rate\":0.014,\"p95_ms\":659.6,\"mb\":0.23,\"novel_routes\":[]},{\"edge\":\"auth -> users\",\"calls\":194,\"error_rate\":0.01,\"p95_ms\":19.7,\"mb\":0.19,\"novel_routes\":[]},{\"edge\":\"orders -> inventory\",\"calls\":347,\"error_rate\":0.006,\"p95_ms\":37.5,\"mb\":0.15,\"novel_routes\":[]},{\"edge\":\"orders -> notifications\",\"calls\":347,\"error_rate\":0.017,\"p95_ms\":290.5,\"mb\":0.12,\"novel_routes\":[]}],\"novel_edges\":2}"
+    },
+    {
+      "at": "2026-11-02T13:04:22.564578+00:00",
+      "tool": "classify_incident",
+      "arguments": {
+        "incident_type": "data_exfiltration",
+        "confidence": 0.8,
+        "affected_services": [
+          "notifications"
+        ],
+        "summary": "Heuristic triage of notifications: data_exfiltration. novel edge notifications -> users carrying 27.49 MB; novel edge notifications -> egress:203.0.113.77 carrying 27.29 MB",
+        "evidence": [
+          "novel edge notifications -> users carrying 27.49 MB",
+          "novel edge notifications -> egress:203.0.113.77 carrying 27.29 MB"
+        ]
+      },
+      "ok": true,
+      "result": "{\"recorded\":true,\"incident_id\":\"inc-fa462178\",\"containment_permitted\":[\"block_ips\",\"isolate_service\"],\"always_permitted\":[\"notify_admin\"]}"
+    },
+    {
+      "at": "2026-11-02T13:04:22.564578+00:00",
+      "tool": "block_ips",
+      "arguments": {
+        "targets": [
+          "203.0.113.77"
+        ],
+        "reason": "exfiltration destination",
+        "ttl_minutes": 1440
+      },
+      "ok": true,
+      "result": "{\"blocked\":1,\"expires_at\":\"2026-11-03T13:04:22.564578+00:00\",\"sample_commands\":[\"nft add element inet filter blocklist { 203.0.113.77/32 timeout 86400s }\"]}"
+    },
+    {
+      "at": "2026-11-02T13:04:22.564578+00:00",
+      "tool": "isolate_service",
+      "arguments": {
+        "service": "notifications",
+        "reason": "workload exfiltrating user data"
+      },
+      "ok": true,
+      "result": "{\"isolated\":\"notifications\",\"applied_manifest\":\"apiVersion: networking.k8s.io/v1\\nkind: NetworkPolicy\\nmetadata:\\n  name: quarantine-notifications\\n  namespace: shop\\n  labels: {meshguard/incident: inc-fa462178}\\nspec:\\n  podSelector: {matchLabels: {app: notifications}}\\n  policyTypes: [Ingress, Egress]\\n  ingress:\\n    - from: [{namespaceSelector: {matchLabels: {name: observability}}}]\\n  egress: []\\n\"}"
+    },
+    {
+      "at": "2026-11-02T13:04:22.564578+00:00",
+      "tool": "notify_admin",
+      "arguments": {
+        "severity": "critical",
+        "title": "data_exfiltration on notifications",
+        "summary": "Heuristic triage of notifications: data_exfiltration. novel edge notifications -> users carrying 27.49 MB; novel edge notifications -> egress:203.0.113.77 carrying 27.29 MB",
+        "recommendations": [
+          "Validate the automated triage."
+        ]
+      },
+      "ok": true,
+      "result": "{\"delivered\":true,\"at\":\"2026-11-02T13:04:22.564578+00:00\"}"
+    }
+  ]
+}

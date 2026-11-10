@@ -1,0 +1,111 @@
+{
+  "training_windows": 69112,
+  "clean_hours": 6,
+  "runs": 15,
+  "reports": [
+    {
+      "name": "One-Class SVM",
+      "threshold": -0.636547956826238,
+      "roc_auc": 0.9664847481301253,
+      "pr_auc": 0.9010398110574704,
+      "precision": 0.8748517200474496,
+      "recall": 0.7587448559670782,
+      "f1": 0.8126721763085399,
+      "false_alarms_per_hour": 0.33348772579898106,
+      "incident_recall": {
+        "ddos": 1.0,
+        "brute_force": 1.0,
+        "software_fault": 1.0,
+        "data_exfiltration": 1.0,
+        "benign": 1.0
+      },
+      "detection_delay_s": {
+        "ddos": 20.0,
+        "brute_force": 23.333333333333332,
+        "software_fault": 20.0,
+        "data_exfiltration": 20.0,
+        "benign": 36.666666666666664
+      },
+      "fit_seconds": 1.5061665530001846,
+      "score_us_per_window": 30.02914499378624
+    },
+    {
+      "name": "Isolation Forest",
+      "threshold": 0.5834883126081837,
+      "roc_auc": 0.9573150870355351,
+      "pr_auc": 0.8336140201860861,
+      "precision": 0.8593964334705075,
+      "recall": 0.6445473251028807,
+      "f1": 0.7366255144032922,
+      "false_alarms_per_hour": 0.16674386289949053,
+      "incident_recall": {
+        "ddos": 1.0,
+        "brute_force": 1.0,
+        "software_fault": 1.0,
+        "data_exfiltration": 1.0,
+        "benign": 1.0
+      },
+      "detection_delay_s": {
+        "ddos": 20.0,
+        "brute_force": 23.333333333333332,
+        "software_fault": 20.0,
+        "data_exfiltration": 33.333333333333336,
+        "benign": 40.0
+      },
+      "fit_seconds": 4.401228429999719,
+      "score_us_per_window": 49.73928595782257
+    },
+    {
+      "name": "Local Outlier Factor",
+      "threshold": 1.8564512288896438,
+      "roc_auc": 0.9455276482382625,
+      "pr_auc": 0.8500806277903835,
+      "precision": 0.8412600370599135,
+      "recall": 0.7006172839506173,
+      "f1": 0.7645242772944149,
+      "false_alarms_per_hour": 0.33348772579898106,
+      "incident_recall": {
+        "ddos": 1.0,
+        "brute_force": 1.0,
+        "software_fault": 1.0,
+        "data_exfiltration": 1.0,
+        "benign": 1.0
+      },
+      "detection_delay_s": {
+        "ddos": 20.0,
+        "brute_force": 23.333333333333332,
+        "software_fault": 20.0,
+        "data_exfiltration": 20.0,
+        "benign": 36.666666666666664
+      },
+      "fit_seconds": 88.65770355899986,
+      "score_us_per_window": 2156.7393264879265
+    },
+    {
+      "name": "Robust z-score",
+      "threshold": 12.5,
+      "roc_auc": 0.969546855756811,
+      "pr_auc": 0.8956049559641855,
+      "precision": 0.9378283712784589,
+      "recall": 0.5509259259259259,
+      "f1": 0.6941023979261179,
+      "false_alarms_per_hour": 0.33348772579898106,
+      "incident_recall": {
+        "ddos": 1.0,
+        "brute_force": 1.0,
+        "software_fault": 1.0,
+        "data_exfiltration": 1.0,
+        "benign": 1.0
+      },
+      "detection_delay_s": {
+        "ddos": 20.0,
+        "brute_force": 30.0,
+        "software_fault": 20.0,
+        "data_exfiltration": 20.0,
+        "benign": 50.0
+      },
+      "fit_seconds": 0.9109875740005009,
+      "score_us_per_window": 8.794570133347975
+    }
+  ]
+}

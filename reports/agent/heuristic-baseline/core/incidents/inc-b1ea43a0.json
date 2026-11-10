@@ -1,0 +1,134 @@
+{
+  "incident_id": "inc-b1ea43a0",
+  "model": "heuristic-baseline",
+  "outcome": "completed",
+  "turns": 3,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cached_input_tokens": 0
+  },
+  "wall_seconds": 0.02,
+  "signal": {
+    "signal_id": "sig-03f4fda0df",
+    "service": "payments",
+    "window": [
+      "2026-11-02T13:04:10+00:00",
+      "2026-11-02T13:04:20+00:00"
+    ],
+    "anomaly_score": -0.0003,
+    "threshold": -0.6365,
+    "correlated_services": [
+      "orders"
+    ],
+    "top_deviations": [
+      {
+        "feature": "server_error_rate",
+        "value": 0.3333,
+        "baseline_median": 0.0,
+        "robust_z": 33.33
+      },
+      {
+        "feature": "latency_p95_ms",
+        "value": 5000.0,
+        "baseline_median": 444.5593,
+        "robust_z": 8.49
+      },
+      {
+        "feature": "latency_p50_ms",
+        "value": 598.4311,
+        "baseline_median": 293.8332,
+        "robust_z": 4.64
+      }
+    ]
+  },
+  "classification": {
+    "incident_type": "software_fault",
+    "confidence": 0.75,
+    "affected_services": [
+      "payments"
+    ],
+    "summary": "Heuristic triage of payments: software_fault. server error rate 26% at normal volume; java.lang.NullPointerException: Cannot invoke \"Currency.getCode()\" at ChargeService.capture(ChargeService.java:142) [release=payments@2.14.0]; validation failed",
+    "evidence": [
+      "server error rate 26% at normal volume",
+      "java.lang.NullPointerException: Cannot invoke \"Currency.getCode()\" at ChargeService.capture(ChargeService.java:142) [release=payments@2.14.0]",
+      "validation failed"
+    ]
+  },
+  "revisions": [],
+  "blocked": [],
+  "isolated": [],
+  "denied": [],
+  "notifications": [
+    "high"
+  ],
+  "final_text": "Investigation finished.",
+  "error": null,
+  "audit": [
+    {
+      "at": "2026-11-02T13:04:22.081349+00:00",
+      "tool": "service_health",
+      "arguments": {
+        "service": "payments",
+        "lookback_seconds": 600,
+        "bucket_seconds": 30
+      },
+      "ok": true,
+      "result": "{\"service\":\"payments\",\"baseline\":{\"requests_per_s\":1.1,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":444.6,\"bytes_per_response\":661},\"series\":[{\"t\":\"12:59:52\",\"requests_per_s\":1.13,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":443.5,\"mb_out\":0.02},{\"t\":\"13:00:22\",\"requests_per_s\":1.5,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":784.5,\"mb_out\":0.03},{\"t\":\"13:00:52\",\"requests_per_s\":1.8,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":843.1,\"mb_out\":0.04},{\"t\":\"13:01:22\",\"requests_per_s\":1.43,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":645.7,\"mb_out\":0.03},{\"t\":\"13:01:52\",\"requests_per_s\":1.53,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":4021.0,\"mb_out\":0.04},{\"t\":\"13:02:22\",\"requests_per_s\":1.4,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":1329.2,\"mb_out\":0.03},{\"t\":\"13:02:52\",\"requests_per_s\":1.6,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":611.6,\"mb_out\":0.03},{\"t\":\"13:03:22\",\"requests_per_s\":1.37,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":763.4,\"mb_out\":0.03},{\"t\":\"13:03:52\",\"requests_per_s\":1.03,\"server_error_rate\":0.258,\"auth_failure_rate\":0.0,\"p95_ms\":5000.0,\"mb_out\":0.02}],\"top_error_messages\":[{\"message\":\"java.lang.NullPointerException: Cannot invoke \\\"Currency.getCode()\\\" at ChargeService.capture(ChargeService.java:142) [release=payments@2.14.0]\",\"count\":5},{\"message\":\"validation failed\",\"count\":4},{\"message\":\"upstream timeout after 5000ms in payments POST /v1/charges\",\"count\":3},{\"message\":\"resource not found\",\"count\":2}]}"
+    },
+    {
+      "at": "2026-11-02T13:04:22.081349+00:00",
+      "tool": "top_clients",
+      "arguments": {
+        "service": "payments",
+        "lookback_seconds": 120,
+        "rank_by": "errors",
+        "limit": 50
+      },
+      "ok": true,
+      "result": "{\"service\":\"payments\",\"total_requests\":162,\"distinct_clients\":109,\"clients_new_in_window\":77,\"clients\":[{\"ip\":\"78.106.223.238\",\"requests\":1,\"share\":0.0062,\"error_rate\":1.0,\"auth_failures\":0,\"bytes\":107,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/charges\"},{\"ip\":\"178.66.102.187\",\"requests\":1,\"share\":0.0062,\"error_rate\":1.0,\"auth_failures\":0,\"bytes\":204,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/charges\"},{\"ip\":\"178.66.150.60\",\"requests\":3,\"share\":0.0185,\"error_rate\":0.333,\"auth_failures\":0,\"bytes\":1451,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/charges\"},{\"ip\":\"78.106.95.235\",\"requests\":6,\"share\":0.037,\"error_rate\":0.167,\"auth_failures\":0,\"bytes\":3571,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/charges\"},{\"ip\":\"91.77.8.209\",\"requests\":2,\"share\":0.0123,\"error_rate\":0.5,\"auth_failures\":0,\"bytes\":1158,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/charges\"},{\"ip\":\"212.164.86.137\",\"requests\":1,\"share\":0.0062,\"error_rate\":1.0,\"auth_failures\":0,\"bytes\":117,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/charges\"},{\"ip\":\"91.77.227.39\",\"requests\":1,\"share\":0.0062,\"error_rate\":1.0,\"auth_failures\":0,\"bytes\":252,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/charges\"},{\"ip\":\"91.77.159.228\",\"requests\":1,\"share\":0.0062,\"error_rate\":1.0,\"auth_failures\":0,\"bytes\":230,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/charges\"},{\"ip\":\"46.39.138.219\",\"requests\":1,\"share\":0.0062,\"error_rate\":1.0,\"auth_failures\":0,\"bytes\":256,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/charges\"},{\"ip\":\"95.24.46.94\",\"requests\":1,\"share\":0.0062,\"error_rate\":1.0,\"auth_failures\":0,\"bytes\":174,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/charges\"},{\"ip\":\"93.80.71.252\",\"requests\":1,\"share\":0.0062,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":409,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/charges\"},{\"ip\":\"37.112.135.24\",\"requests\":1,\"share\":0.0062,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":667,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/charges\"},{\"ip\":\"31.173.123.242\",\"requests\":1,\"share\":0.0062,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":506,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/charges\"},{\"ip\":\"89.113.152.140\",\"requests\":9,\"share\":0.0556,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":5895,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/charges\"},{\"ip\":\"79.139.179.221\",\"requests\":2,\"share\":0.0123,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":2117,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/charges\"},{\"ip\":\"85.140.189.21\",\"requests\":1,\"share\":0.0062,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":1389,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/charges\"},{\"ip\":\"212.164.139.215\",\"requests\":4,\"share\":0.0247,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":3016,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/charges\"},{\"ip\":\"37.112.251.40\",\"requests\":1,\"share\":0.0062,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":701,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/charges\"},{\"ip\":\"46.39.41.195\",\"requests\":2,\"share\":0.0123,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":1061,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/charges\"},{\"ip\":\"77.37.44.129\",\"requests\":1,\"share\":0.0062,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":1042,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/charges\"},{\"ip\":\"46.39.156.4\",\"requests\":4,\"share\":0.0247,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":2697,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/charges\"},{\"ip\":\"85.140.223.65\",\"requests\":1,\"share\":0.0062,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":279,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/charges\"},{\"ip\":\"176.59.166.144\",\"requests\":1,\"share\":0.0062,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":1105,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"P"
+    },
+    {
+      "at": "2026-11-02T13:04:22.081349+00:00",
+      "tool": "call_graph",
+      "arguments": {
+        "lookback_seconds": 300
+      },
+      "ok": true,
+      "result": "{\"edges\":[{\"edge\":\"gateway -> catalog\",\"calls\":2384,\"error_rate\":0.013,\"p95_ms\":62.5,\"mb\":26.8,\"novel_routes\":[]},{\"edge\":\"external -> gateway\",\"calls\":3823,\"error_rate\":0.02,\"p95_ms\":546.5,\"mb\":7.6,\"novel_routes\":[]},{\"edge\":\"gateway -> orders\",\"calls\":840,\"error_rate\":0.025,\"p95_ms\":1006.5,\"mb\":3.31,\"novel_routes\":[]},{\"edge\":\"notifications -> egress:198.51.100.25\",\"calls\":383,\"error_rate\":0.01,\"p95_ms\":377.5,\"mb\":0.93,\"novel_routes\":[]},{\"edge\":\"gateway -> users\",\"calls\":374,\"error_rate\":0.011,\"p95_ms\":16.4,\"mb\":0.64,\"novel_routes\":[]},{\"edge\":\"payments -> egress:198.51.100.40\",\"calls\":376,\"error_rate\":0.005,\"p95_ms\":766.9,\"mb\":0.48,\"novel_routes\":[]},{\"edge\":\"gateway -> auth\",\"calls\":1433,\"error_rate\":0.026,\"p95_ms\":66.1,\"mb\":0.43,\"novel_routes\":[]},{\"edge\":\"catalog -> inventory\",\"calls\":940,\"error_rate\":0.021,\"p95_ms\":13.1,\"mb\":0.32,\"novel_routes\":[]},{\"edge\":\"orders -> payments\",\"calls\":384,\"error_rate\":0.036,\"p95_ms\":984.8,\"mb\":0.26,\"novel_routes\":[]},{\"edge\":\"auth -> users\",\"calls\":218,\"error_rate\":0.028,\"p95_ms\":18.8,\"mb\":0.21,\"novel_routes\":[]},{\"edge\":\"notifications -> users\",\"calls\":383,\"error_rate\":0.013,\"p95_ms\":16.4,\"mb\":0.21,\"novel_routes\":[]},{\"edge\":\"orders -> inventory\",\"calls\":384,\"error_rate\":0.018,\"p95_ms\":38.8,\"mb\":0.17,\"novel_routes\":[]},{\"edge\":\"orders -> notifications\",\"calls\":384,\"error_rate\":0.01,\"p95_ms\":405.3,\"mb\":0.13,\"novel_routes\":[]}],\"novel_edges\":0}"
+    },
+    {
+      "at": "2026-11-02T13:04:22.081349+00:00",
+      "tool": "classify_incident",
+      "arguments": {
+        "incident_type": "software_fault",
+        "confidence": 0.75,
+        "affected_services": [
+          "payments"
+        ],
+        "summary": "Heuristic triage of payments: software_fault. server error rate 26% at normal volume; java.lang.NullPointerException: Cannot invoke \"Currency.getCode()\" at ChargeService.capture(ChargeService.java:142) [release=payments@2.14.0]; validation failed",
+        "evidence": [
+          "server error rate 26% at normal volume",
+          "java.lang.NullPointerException: Cannot invoke \"Currency.getCode()\" at ChargeService.capture(ChargeService.java:142) [release=payments@2.14.0]",
+          "validation failed"
+        ]
+      },
+      "ok": true,
+      "result": "{\"recorded\":true,\"incident_id\":\"inc-b1ea43a0\",\"containment_permitted\":[],\"always_permitted\":[\"notify_admin\"]}"
+    },
+    {
+      "at": "2026-11-02T13:04:22.081349+00:00",
+      "tool": "notify_admin",
+      "arguments": {
+        "severity": "high",
+        "title": "software_fault on payments",
+        "summary": "Heuristic triage of payments: software_fault. server error rate 26% at normal volume; java.lang.NullPointerException: Cannot invoke \"Currency.getCode()\" at ChargeService.capture(ChargeService.java:142) [release=payments@2.14.0]; validation failed",
+        "recommendations": [
+          "Validate the automated triage."
+        ]
+      },
+      "ok": true,
+      "result": "{\"delivered\":true,\"at\":\"2026-11-02T13:04:22.081349+00:00\"}"
+    }
+  ]
+}

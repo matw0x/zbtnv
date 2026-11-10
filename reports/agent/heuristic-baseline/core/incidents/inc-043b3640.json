@@ -1,0 +1,147 @@
+{
+  "incident_id": "inc-043b3640",
+  "model": "heuristic-baseline",
+  "outcome": "completed",
+  "turns": 3,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cached_input_tokens": 0
+  },
+  "wall_seconds": 0.05,
+  "signal": {
+    "signal_id": "sig-d593994e21",
+    "service": "gateway",
+    "window": [
+      "2026-11-02T13:04:30+00:00",
+      "2026-11-02T13:04:40+00:00"
+    ],
+    "anomaly_score": -0.0014,
+    "threshold": -0.6365,
+    "correlated_services": [
+      "catalog",
+      "inventory",
+      "auth",
+      "notifications",
+      "users",
+      "orders"
+    ],
+    "top_deviations": [
+      {
+        "feature": "latency_p50_ms",
+        "value": 222.2778,
+        "baseline_median": 34.3806,
+        "robust_z": 15.46
+      },
+      {
+        "feature": "latency_p95_ms",
+        "value": 2366.1096,
+        "baseline_median": 462.7714,
+        "robust_z": 8.45
+      },
+      {
+        "feature": "server_error_rate",
+        "value": 0.0618,
+        "baseline_median": 0.0,
+        "robust_z": 6.18
+      },
+      {
+        "feature": "unique_clients",
+        "value": 247.0,
+        "baseline_median": 88.0,
+        "robust_z": 3.74
+      },
+      {
+        "feature": "requests",
+        "value": 372.0,
+        "baseline_median": 110.0,
+        "robust_z": 3.67
+      }
+    ]
+  },
+  "classification": {
+    "incident_type": "benign",
+    "confidence": 0.6,
+    "affected_services": [
+      "gateway"
+    ],
+    "summary": "Heuristic triage of gateway: benign. request rate x2.8, server errors 2.6%",
+    "evidence": [
+      "request rate x2.8, server errors 2.6%"
+    ]
+  },
+  "revisions": [],
+  "blocked": [],
+  "isolated": [],
+  "denied": [],
+  "notifications": [
+    "low"
+  ],
+  "final_text": "Investigation finished.",
+  "error": null,
+  "audit": [
+    {
+      "at": "2026-11-02T13:04:42.225579+00:00",
+      "tool": "service_health",
+      "arguments": {
+        "service": "gateway",
+        "lookback_seconds": 600,
+        "bucket_seconds": 30
+      },
+      "ok": true,
+      "result": "{\"service\":\"gateway\",\"baseline\":{\"requests_per_s\":11.0,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":462.8,\"bytes_per_response\":1974},\"series\":[{\"t\":\"12:59:42\",\"requests_per_s\":5.87,\"server_error_rate\":0.006,\"auth_failure_rate\":0.0,\"p95_ms\":517.3,\"mb_out\":0.35},{\"t\":\"13:00:12\",\"requests_per_s\":15.93,\"server_error_rate\":0.006,\"auth_failure_rate\":0.0,\"p95_ms\":540.6,\"mb_out\":0.93},{\"t\":\"13:00:42\",\"requests_per_s\":14.07,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":552.4,\"mb_out\":0.79},{\"t\":\"13:01:12\",\"requests_per_s\":16.33,\"server_error_rate\":0.014,\"auth_failure_rate\":0.0,\"p95_ms\":551.7,\"mb_out\":0.97},{\"t\":\"13:01:42\",\"requests_per_s\":15.47,\"server_error_rate\":0.002,\"auth_failure_rate\":0.0,\"p95_ms\":525.4,\"mb_out\":0.94},{\"t\":\"13:02:12\",\"requests_per_s\":13.4,\"server_error_rate\":0.002,\"auth_failure_rate\":0.0,\"p95_ms\":544.7,\"mb_out\":0.77},{\"t\":\"13:02:42\",\"requests_per_s\":15.2,\"server_error_rate\":0.002,\"auth_failure_rate\":0.0,\"p95_ms\":681.5,\"mb_out\":0.93},{\"t\":\"13:03:12\",\"requests_per_s\":13.77,\"server_error_rate\":0.007,\"auth_failure_rate\":0.0,\"p95_ms\":476.8,\"mb_out\":0.82},{\"t\":\"13:03:42\",\"requests_per_s\":16.93,\"server_error_rate\":0.004,\"auth_failure_rate\":0.0,\"p95_ms\":472.0,\"mb_out\":1.05},{\"t\":\"13:04:12\",\"requests_per_s\":31.0,\"server_error_rate\":0.026,\"auth_failure_rate\":0.0,\"p95_ms\":1019.9,\"mb_out\":1.79}],\"top_error_messages\":[{\"message\":\"validation failed\",\"count\":32},{\"message\":\"resource not found\",\"count\":26},{\"message\":\"unhandled exception: connection reset by peer\",\"count\":7},{\"message\":\"dependency catalog failed with 503\",\"count\":6},{\"message\":\"dependency orders failed with 502\",\"count\":5}]}"
+    },
+    {
+      "at": "2026-11-02T13:04:42.225579+00:00",
+      "tool": "top_clients",
+      "arguments": {
+        "service": "gateway",
+        "lookback_seconds": 120,
+        "rank_by": "errors",
+        "limit": 50
+      },
+      "ok": true,
+      "result": "{\"service\":\"gateway\",\"total_requests\":2307,\"distinct_clients\":869,\"clients_new_in_window\":335,\"clients\":[{\"ip\":\"89.113.152.140\",\"requests\":131,\"share\":0.0568,\"error_rate\":0.038,\"auth_failures\":0,\"bytes\":268974,\"distinct_users\":2,\"seen_before\":true,\"top_request\":\"GET /api/catalog/search\"},{\"ip\":\"78.106.95.235\",\"requests\":81,\"share\":0.0351,\"error_rate\":0.025,\"auth_failures\":0,\"bytes\":164957,\"distinct_users\":2,\"seen_before\":true,\"top_request\":\"GET /api/catalog/search\"},{\"ip\":\"91.77.236.228\",\"requests\":4,\"share\":0.0017,\"error_rate\":0.5,\"auth_failures\":0,\"bytes\":4796,\"distinct_users\":2,\"seen_before\":true,\"top_request\":\"GET /api/catalog/search\"},{\"ip\":\"212.164.161.149\",\"requests\":58,\"share\":0.0251,\"error_rate\":0.017,\"auth_failures\":0,\"bytes\":115059,\"distinct_users\":2,\"seen_before\":true,\"top_request\":\"GET /api/catalog/search\"},{\"ip\":\"31.173.211.222\",\"requests\":16,\"share\":0.0069,\"error_rate\":0.062,\"auth_failures\":0,\"bytes\":28568,\"distinct_users\":2,\"seen_before\":true,\"top_request\":\"GET /api/catalog/search\"},{\"ip\":\"212.164.67.142\",\"requests\":26,\"share\":0.0113,\"error_rate\":0.038,\"auth_failures\":0,\"bytes\":65347,\"distinct_users\":2,\"seen_before\":true,\"top_request\":\"GET /api/catalog/search\"},{\"ip\":\"77.37.208.151\",\"requests\":3,\"share\":0.0013,\"error_rate\":0.333,\"auth_failures\":0,\"bytes\":2158,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /api/catalog/search\"},{\"ip\":\"93.80.108.130\",\"requests\":13,\"share\":0.0056,\"error_rate\":0.077,\"auth_failures\":0,\"bytes\":33774,\"distinct_users\":2,\"seen_before\":true,\"top_request\":\"GET /api/catalog/items/{id}\"},{\"ip\":\"178.66.38.68\",\"requests\":3,\"share\":0.0013,\"error_rate\":0.333,\"auth_failures\":0,\"bytes\":1784,\"distinct_users\":2,\"seen_before\":true,\"top_request\":\"POST /api/auth/login\"},{\"ip\":\"89.113.224.241\",\"requests\":2,\"share\":0.0009,\"error_rate\":0.5,\"auth_failures\":0,\"bytes\":3020,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"GET /api/profile\"},{\"ip\":\"89.113.113.208\",\"requests\":3,\"share\":0.0013,\"error_rate\":0.333,\"auth_failures\":0,\"bytes\":5216,\"distinct_users\":2,\"seen_before\":true,\"top_request\":\"GET /api/catalog/search\"},{\"ip\":\"178.66.200.161\",\"requests\":14,\"share\":0.0061,\"error_rate\":0.071,\"auth_failures\":0,\"bytes\":24380,\"distinct_users\":2,\"seen_before\":true,\"top_request\":\"GET /api/catalog/search\"},{\"ip\":\"93.80.93.68\",\"requests\":9,\"share\":0.0039,\"error_rate\":0.111,\"auth_failures\":0,\"bytes\":10118,\"distinct_users\":2,\"seen_before\":true,\"top_request\":\"GET /api/catalog/search\"},{\"ip\":\"78.106.230.221\",\"requests\":4,\"share\":0.0017,\"error_rate\":0.25,\"auth_failures\":0,\"bytes\":4376,\"distinct_users\":2,\"seen_before\":true,\"top_request\":\"GET /api/catalog/search\"},{\"ip\":\"78.106.76.129\",\"requests\":2,\"share\":0.0009,\"error_rate\":0.5,\"auth_failures\":0,\"bytes\":1616,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /api/catalog/search\"},{\"ip\":\"77.37.10.35\",\"requests\":13,\"share\":0.0056,\"error_rate\":0.077,\"auth_failures\":0,\"bytes\":25577,\"distinct_users\":2,\"seen_before\":true,\"top_request\":\"GET /api/catalog/search\"},{\"ip\":\"91.77.62.84\",\"requests\":8,\"share\":0.0035,\"error_rate\":0.125,\"auth_failures\":0,\"bytes\":10373,\"distinct_users\":2,\"seen_before\":true,\"top_request\":\"GET /api/catalog/search\"},{\"ip\":\"77.37.169.222\",\"requests\":2,\"share\":0.0009,\"error_rate\":0.5,\"auth_failures\":0,\"bytes\":842,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"GET /api/catalog/search\"},{\"ip\":\"178.66.32.33\",\"requests\":1,\"share\":0.0004,\"error_rate\":1.0,\"auth_failures\":0,\"bytes\":176,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /api/catalog/search\"},{\"ip\":\"46.39.132.72\",\"requests\":1,\"share\":0.0004,\"error_rate\":1.0,\"auth_failures\":0,\"bytes\":216,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"GET /api/catalog/search\"},{\"ip\":\"188.162.173.84\",\"requests\":1,\"share\":0.0004,\"error_rate\":1.0,\"auth_failures\":0,\"bytes\":102,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"GET /api/orders\"},{\"ip\":\"95.24.157.101\",\"requests\":1,\"share\":0.0004,\"error_rate\":1.0,\"auth_failures\":0,\"bytes\":128,\"distinct_users\":1,\"seen_before\":false,\"top_r"
+    },
+    {
+      "at": "2026-11-02T13:04:42.225579+00:00",
+      "tool": "call_graph",
+      "arguments": {
+        "lookback_seconds": 300
+      },
+      "ok": true,
+      "result": "{\"edges\":[{\"edge\":\"gateway -> catalog\",\"calls\":2986,\"error_rate\":0.016,\"p95_ms\":158.3,\"mb\":33.46,\"novel_routes\":[]},{\"edge\":\"external -> gateway\",\"calls\":4739,\"error_rate\":0.021,\"p95_ms\":640.6,\"mb\":9.34,\"novel_routes\":[]},{\"edge\":\"gateway -> orders\",\"calls\":1017,\"error_rate\":0.024,\"p95_ms\":1223.6,\"mb\":4.05,\"novel_routes\":[]},{\"edge\":\"notifications -> egress:198.51.100.25\",\"calls\":455,\"error_rate\":0.009,\"p95_ms\":939.4,\"mb\":1.1,\"novel_routes\":[]},{\"edge\":\"gateway -> users\",\"calls\":469,\"error_rate\":0.019,\"p95_ms\":31.2,\"mb\":0.81,\"novel_routes\":[]},{\"edge\":\"payments -> egress:198.51.100.40\",\"calls\":457,\"error_rate\":0.007,\"p95_ms\":1555.4,\"mb\":0.58,\"novel_routes\":[]},{\"edge\":\"gateway -> auth\",\"calls\":1746,\"error_rate\":0.025,\"p95_ms\":80.0,\"mb\":0.52,\"novel_routes\":[]},{\"edge\":\"catalog -> inventory\",\"calls\":1167,\"error_rate\":0.021,\"p95_ms\":29.7,\"mb\":0.39,\"novel_routes\":[]},{\"edge\":\"orders -> payments\",\"calls\":457,\"error_rate\":0.013,\"p95_ms\":1673.2,\"mb\":0.31,\"novel_routes\":[]},{\"edge\":\"notifications -> users\",\"calls\":455,\"error_rate\":0.015,\"p95_ms\":30.3,\"mb\":0.26,\"novel_routes\":[]},{\"edge\":\"auth -> users\",\"calls\":259,\"error_rate\":0.023,\"p95_ms\":65.8,\"mb\":0.25,\"novel_routes\":[]},{\"edge\":\"orders -> inventory\",\"calls\":457,\"error_rate\":0.024,\"p95_ms\":73.4,\"mb\":0.2,\"novel_routes\":[]},{\"edge\":\"orders -> notifications\",\"calls\":457,\"error_rate\":0.02,\"p95_ms\":1063.5,\"mb\":0.16,\"novel_routes\":[]}],\"novel_edges\":0}"
+    },
+    {
+      "at": "2026-11-02T13:04:42.225579+00:00",
+      "tool": "classify_incident",
+      "arguments": {
+        "incident_type": "benign",
+        "confidence": 0.6,
+        "affected_services": [
+          "gateway"
+        ],
+        "summary": "Heuristic triage of gateway: benign. request rate x2.8, server errors 2.6%",
+        "evidence": [
+          "request rate x2.8, server errors 2.6%"
+        ]
+      },
+      "ok": true,
+      "result": "{\"recorded\":true,\"incident_id\":\"inc-043b3640\",\"containment_permitted\":[],\"always_permitted\":[\"notify_admin\"]}"
+    },
+    {
+      "at": "2026-11-02T13:04:42.225579+00:00",
+      "tool": "notify_admin",
+      "arguments": {
+        "severity": "low",
+        "title": "benign on gateway",
+        "summary": "Heuristic triage of gateway: benign. request rate x2.8, server errors 2.6%",
+        "recommendations": [
+          "Validate the automated triage."
+        ]
+      },
+      "ok": true,
+      "result": "{\"delivered\":true,\"at\":\"2026-11-02T13:04:42.225579+00:00\"}"
+    }
+  ]
+}

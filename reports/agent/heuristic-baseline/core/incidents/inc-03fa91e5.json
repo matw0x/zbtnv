@@ -1,0 +1,157 @@
+{
+  "incident_id": "inc-03fa91e5",
+  "model": "heuristic-baseline",
+  "outcome": "completed",
+  "turns": 3,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cached_input_tokens": 0
+  },
+  "wall_seconds": 0.04,
+  "signal": {
+    "signal_id": "sig-350e91b476",
+    "service": "auth",
+    "window": [
+      "2026-11-02T13:04:10+00:00",
+      "2026-11-02T13:04:20+00:00"
+    ],
+    "anomaly_score": 0.0,
+    "threshold": -0.6365,
+    "correlated_services": [],
+    "top_deviations": [
+      {
+        "feature": "auth_failure_rate",
+        "value": 0.4091,
+        "baseline_median": 0.0,
+        "robust_z": 20.45
+      },
+      {
+        "feature": "latency_p50_ms",
+        "value": 19.423,
+        "baseline_median": 3.1366,
+        "robust_z": 14.27
+      },
+      {
+        "feature": "outbound_bytes",
+        "value": 35625.0,
+        "baseline_median": 5397.0,
+        "robust_z": 3.25
+      }
+    ]
+  },
+  "classification": {
+    "incident_type": "brute_force",
+    "confidence": 0.85,
+    "affected_services": [
+      "auth"
+    ],
+    "summary": "Heuristic triage of auth: brute_force. auth failure rate 30%; 7 sources with repeated failed logins",
+    "evidence": [
+      "auth failure rate 30%",
+      "7 sources with repeated failed logins"
+    ]
+  },
+  "revisions": [],
+  "blocked": [
+    "5.188.62.233/32",
+    "141.98.11.10/32",
+    "141.98.11.55/32",
+    "141.98.11.93/32",
+    "194.26.29.24/32",
+    "194.26.29.46/32",
+    "194.26.29.60/32"
+  ],
+  "isolated": [],
+  "denied": [],
+  "notifications": [
+    "critical"
+  ],
+  "final_text": "Investigation finished.",
+  "error": null,
+  "audit": [
+    {
+      "at": "2026-11-02T13:04:22.989680+00:00",
+      "tool": "service_health",
+      "arguments": {
+        "service": "auth",
+        "lookback_seconds": 600,
+        "bucket_seconds": 30
+      },
+      "ok": true,
+      "result": "{\"service\":\"auth\",\"baseline\":{\"requests_per_s\":4.1,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":53.2,\"bytes_per_response\":290},\"series\":[{\"t\":\"12:59:52\",\"requests_per_s\":4.63,\"server_error_rate\":0.007,\"auth_failure_rate\":0.0,\"p95_ms\":91.1,\"mb_out\":0.05},{\"t\":\"13:00:22\",\"requests_per_s\":5.13,\"server_error_rate\":0.0,\"auth_failure_rate\":0.006,\"p95_ms\":57.4,\"mb_out\":0.04},{\"t\":\"13:00:52\",\"requests_per_s\":5.37,\"server_error_rate\":0.006,\"auth_failure_rate\":0.037,\"p95_ms\":69.2,\"mb_out\":0.05},{\"t\":\"13:01:22\",\"requests_per_s\":6.27,\"server_error_rate\":0.0,\"auth_failure_rate\":0.016,\"p95_ms\":86.4,\"mb_out\":0.05},{\"t\":\"13:01:52\",\"requests_per_s\":6.77,\"server_error_rate\":0.005,\"auth_failure_rate\":0.015,\"p95_ms\":78.0,\"mb_out\":0.06},{\"t\":\"13:02:22\",\"requests_per_s\":5.97,\"server_error_rate\":0.0,\"auth_failure_rate\":0.006,\"p95_ms\":72.8,\"mb_out\":0.06},{\"t\":\"13:02:52\",\"requests_per_s\":5.77,\"server_error_rate\":0.006,\"auth_failure_rate\":0.0,\"p95_ms\":72.8,\"mb_out\":0.05},{\"t\":\"13:03:22\",\"requests_per_s\":4.6,\"server_error_rate\":0.007,\"auth_failure_rate\":0.0,\"p95_ms\":57.5,\"mb_out\":0.04},{\"t\":\"13:03:52\",\"requests_per_s\":5.77,\"server_error_rate\":0.0,\"auth_failure_rate\":0.301,\"p95_ms\":100.1,\"mb_out\":0.04}],\"top_error_messages\":[{\"message\":\"validation failed\",\"count\":8},{\"message\":\"resource not found\",\"count\":8},{\"message\":\"unhandled exception: connection reset by peer\",\"count\":4},{\"message\":\"dependency users failed with 500\",\"count\":1},{\"message\":\"authentication failed for login=u-11973\",\"count\":1}]}"
+    },
+    {
+      "at": "2026-11-02T13:04:22.989680+00:00",
+      "tool": "top_clients",
+      "arguments": {
+        "service": "auth",
+        "lookback_seconds": 120,
+        "rank_by": "errors",
+        "limit": 50
+      },
+      "ok": true,
+      "result": "{\"service\":\"auth\",\"total_requests\":663,\"distinct_clients\":377,\"clients_new_in_window\":211,\"clients\":[{\"ip\":\"5.188.62.233\",\"requests\":6,\"share\":0.009,\"error_rate\":1.0,\"auth_failures\":6,\"bytes\":1170,\"distinct_users\":6,\"seen_before\":false,\"top_request\":\"POST /v1/sessions\"},{\"ip\":\"141.98.11.10\",\"requests\":5,\"share\":0.0075,\"error_rate\":1.0,\"auth_failures\":5,\"bytes\":863,\"distinct_users\":5,\"seen_before\":false,\"top_request\":\"POST /v1/sessions\"},{\"ip\":\"194.26.29.24\",\"requests\":3,\"share\":0.0045,\"error_rate\":1.0,\"auth_failures\":3,\"bytes\":559,\"distinct_users\":3,\"seen_before\":false,\"top_request\":\"POST /v1/sessions\"},{\"ip\":\"194.26.29.46\",\"requests\":3,\"share\":0.0045,\"error_rate\":1.0,\"auth_failures\":3,\"bytes\":501,\"distinct_users\":3,\"seen_before\":false,\"top_request\":\"POST /v1/sessions\"},{\"ip\":\"141.98.11.55\",\"requests\":3,\"share\":0.0045,\"error_rate\":1.0,\"auth_failures\":3,\"bytes\":446,\"distinct_users\":3,\"seen_before\":false,\"top_request\":\"POST /v1/sessions\"},{\"ip\":\"141.98.11.93\",\"requests\":3,\"share\":0.0045,\"error_rate\":1.0,\"auth_failures\":3,\"bytes\":393,\"distinct_users\":3,\"seen_before\":false,\"top_request\":\"POST /v1/sessions\"},{\"ip\":\"194.26.29.60\",\"requests\":3,\"share\":0.0045,\"error_rate\":1.0,\"auth_failures\":3,\"bytes\":532,\"distinct_users\":3,\"seen_before\":false,\"top_request\":\"POST /v1/sessions\"},{\"ip\":\"141.98.11.101\",\"requests\":2,\"share\":0.003,\"error_rate\":1.0,\"auth_failures\":2,\"bytes\":294,\"distinct_users\":2,\"seen_before\":false,\"top_request\":\"POST /v1/sessions\"},{\"ip\":\"5.188.62.252\",\"requests\":2,\"share\":0.003,\"error_rate\":1.0,\"auth_failures\":2,\"bytes\":375,\"distinct_users\":2,\"seen_before\":false,\"top_request\":\"POST /v1/sessions\"},{\"ip\":\"5.188.62.140\",\"requests\":2,\"share\":0.003,\"error_rate\":1.0,\"auth_failures\":2,\"bytes\":400,\"distinct_users\":2,\"seen_before\":false,\"top_request\":\"POST /v1/sessions\"},{\"ip\":\"194.26.29.223\",\"requests\":2,\"share\":0.003,\"error_rate\":1.0,\"auth_failures\":2,\"bytes\":386,\"distinct_users\":2,\"seen_before\":false,\"top_request\":\"POST /v1/sessions\"},{\"ip\":\"194.26.29.189\",\"requests\":2,\"share\":0.003,\"error_rate\":1.0,\"auth_failures\":2,\"bytes\":285,\"distinct_users\":2,\"seen_before\":false,\"top_request\":\"POST /v1/sessions\"},{\"ip\":\"5.188.62.231\",\"requests\":2,\"share\":0.003,\"error_rate\":1.0,\"auth_failures\":2,\"bytes\":369,\"distinct_users\":2,\"seen_before\":false,\"top_request\":\"POST /v1/sessions\"},{\"ip\":\"5.188.62.203\",\"requests\":2,\"share\":0.003,\"error_rate\":1.0,\"auth_failures\":2,\"bytes\":352,\"distinct_users\":2,\"seen_before\":false,\"top_request\":\"POST /v1/sessions\"},{\"ip\":\"141.98.11.221\",\"requests\":2,\"share\":0.003,\"error_rate\":1.0,\"auth_failures\":2,\"bytes\":234,\"distinct_users\":2,\"seen_before\":false,\"top_request\":\"POST /v1/sessions\"},{\"ip\":\"109.252.214.44\",\"requests\":27,\"share\":0.0407,\"error_rate\":0.037,\"auth_failures\":0,\"bytes\":7034,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/tokens/verify\"},{\"ip\":\"31.173.22.30\",\"requests\":6,\"share\":0.009,\"error_rate\":0.167,\"auth_failures\":0,\"bytes\":1957,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/tokens/verify\"},{\"ip\":\"79.139.229.115\",\"requests\":5,\"share\":0.0075,\"error_rate\":0.2,\"auth_failures\":0,\"bytes\":3063,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/tokens/verify\"},{\"ip\":\"109.252.132.173\",\"requests\":4,\"share\":0.006,\"error_rate\":0.25,\"auth_failures\":0,\"bytes\":865,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/tokens/verify\"},{\"ip\":\"89.113.52.159\",\"requests\":1,\"share\":0.0015,\"error_rate\":1.0,\"auth_failures\":1,\"bytes\":226,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/sessions\"},{\"ip\":\"176.59.65.182\",\"requests\":2,\"share\":0.003,\"error_rate\":0.5,\"auth_failures\":0,\"bytes\":846,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/tokens/verify\"},{\"ip\":\"89.113.207.86\",\"requests\":2,\"share\":0.003,\"error_rate\":0.5,\"auth_failures\":0,\"bytes\":326,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"GET /v1/tokens/verify\"},{\"ip\":\"78.106.102.149\",\"requests\":1,\"share\":0.0015,\"error_rate\":1.0,\"auth_failures\":0,\"bytes\":125,\"distinct_users\":1,\"seen_before\""
+    },
+    {
+      "at": "2026-11-02T13:04:22.989680+00:00",
+      "tool": "call_graph",
+      "arguments": {
+        "lookback_seconds": 300
+      },
+      "ok": true,
+      "result": "{\"edges\":[{\"edge\":\"gateway -> catalog\",\"calls\":2647,\"error_rate\":0.013,\"p95_ms\":70.1,\"mb\":30.36,\"novel_routes\":[]},{\"edge\":\"external -> gateway\",\"calls\":4164,\"error_rate\":0.018,\"p95_ms\":490.6,\"mb\":8.08,\"novel_routes\":[]},{\"edge\":\"gateway -> orders\",\"calls\":849,\"error_rate\":0.021,\"p95_ms\":802.4,\"mb\":3.48,\"novel_routes\":[]},{\"edge\":\"notifications -> egress:198.51.100.25\",\"calls\":369,\"error_rate\":0.016,\"p95_ms\":323.9,\"mb\":0.92,\"novel_routes\":[]},{\"edge\":\"gateway -> users\",\"calls\":408,\"error_rate\":0.007,\"p95_ms\":28.5,\"mb\":0.69,\"novel_routes\":[]},{\"edge\":\"payments -> egress:198.51.100.40\",\"calls\":368,\"error_rate\":0.011,\"p95_ms\":744.7,\"mb\":0.47,\"novel_routes\":[]},{\"edge\":\"gateway -> auth\",\"calls\":1508,\"error_rate\":0.058,\"p95_ms\":81.2,\"mb\":0.44,\"novel_routes\":[]},{\"edge\":\"catalog -> inventory\",\"calls\":1004,\"error_rate\":0.013,\"p95_ms\":14.2,\"mb\":0.34,\"novel_routes\":[]},{\"edge\":\"orders -> payments\",\"calls\":369,\"error_rate\":0.022,\"p95_ms\":873.5,\"mb\":0.26,\"novel_routes\":[]},{\"edge\":\"auth -> users\",\"calls\":251,\"error_rate\":0.008,\"p95_ms\":35.7,\"mb\":0.24,\"novel_routes\":[]},{\"edge\":\"notifications -> users\",\"calls\":369,\"error_rate\":0.011,\"p95_ms\":21.9,\"mb\":0.21,\"novel_routes\":[]},{\"edge\":\"orders -> inventory\",\"calls\":369,\"error_rate\":0.005,\"p95_ms\":44.3,\"mb\":0.17,\"novel_routes\":[]},{\"edge\":\"orders -> notifications\",\"calls\":369,\"error_rate\":0.016,\"p95_ms\":350.3,\"mb\":0.12,\"novel_routes\":[]}],\"novel_edges\":0}"
+    },
+    {
+      "at": "2026-11-02T13:04:22.989680+00:00",
+      "tool": "classify_incident",
+      "arguments": {
+        "incident_type": "brute_force",
+        "confidence": 0.85,
+        "affected_services": [
+          "auth"
+        ],
+        "summary": "Heuristic triage of auth: brute_force. auth failure rate 30%; 7 sources with repeated failed logins",
+        "evidence": [
+          "auth failure rate 30%",
+          "7 sources with repeated failed logins"
+        ]
+      },
+      "ok": true,
+      "result": "{\"recorded\":true,\"incident_id\":\"inc-03fa91e5\",\"containment_permitted\":[\"block_ips\"],\"always_permitted\":[\"notify_admin\"]}"
+    },
+    {
+      "at": "2026-11-02T13:04:22.989680+00:00",
+      "tool": "block_ips",
+      "arguments": {
+        "targets": [
+          "5.188.62.233",
+          "141.98.11.10",
+          "194.26.29.24",
+          "194.26.29.46",
+          "141.98.11.55",
+          "141.98.11.93",
+          "194.26.29.60"
+        ],
+        "reason": "credential stuffing",
+        "ttl_minutes": 120
+      },
+      "ok": true,
+      "result": "{\"blocked\":7,\"expires_at\":\"2026-11-02T15:04:22.989680+00:00\",\"sample_commands\":[\"nft add element inet filter blocklist { 5.188.62.233/32 timeout 7200s }\",\"nft add element inet filter blocklist { 141.98.11.10/32 timeout 7200s }\",\"nft add element inet filter blocklist { 141.98.11.55/32 timeout 7200s }\"]}"
+    },
+    {
+      "at": "2026-11-02T13:04:22.989680+00:00",
+      "tool": "notify_admin",
+      "arguments": {
+        "severity": "critical",
+        "title": "brute_force on auth",
+        "summary": "Heuristic triage of auth: brute_force. auth failure rate 30%; 7 sources with repeated failed logins",
+        "recommendations": [
+          "Validate the automated triage."
+        ]
+      },
+      "ok": true,
+      "result": "{\"delivered\":true,\"at\":\"2026-11-02T13:04:22.989680+00:00\"}"
+    }
+  ]
+}

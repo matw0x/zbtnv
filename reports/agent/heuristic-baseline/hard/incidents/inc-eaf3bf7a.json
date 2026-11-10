@@ -1,0 +1,130 @@
+{
+  "incident_id": "inc-eaf3bf7a",
+  "model": "heuristic-baseline",
+  "outcome": "completed",
+  "turns": 3,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cached_input_tokens": 0
+  },
+  "wall_seconds": 0.03,
+  "signal": {
+    "signal_id": "sig-e4cca0759e",
+    "service": "auth",
+    "window": [
+      "2026-11-02T13:04:10+00:00",
+      "2026-11-02T13:04:20+00:00"
+    ],
+    "anomaly_score": 0.0,
+    "threshold": -0.6365,
+    "correlated_services": [],
+    "top_deviations": [
+      {
+        "feature": "auth_failure_rate",
+        "value": 0.3768,
+        "baseline_median": 0.0,
+        "robust_z": 18.84
+      },
+      {
+        "feature": "latency_p50_ms",
+        "value": 7.2017,
+        "baseline_median": 3.1366,
+        "robust_z": 6.12
+      },
+      {
+        "feature": "latency_p95_ms",
+        "value": 204.0798,
+        "baseline_median": 53.2199,
+        "robust_z": 4.68
+      }
+    ]
+  },
+  "classification": {
+    "incident_type": "brute_force",
+    "confidence": 0.85,
+    "affected_services": [
+      "auth"
+    ],
+    "summary": "Heuristic triage of auth: brute_force. auth failure rate 28%; 0 sources with repeated failed logins",
+    "evidence": [
+      "auth failure rate 28%",
+      "0 sources with repeated failed logins"
+    ]
+  },
+  "revisions": [],
+  "blocked": [],
+  "isolated": [],
+  "denied": [],
+  "notifications": [
+    "critical"
+  ],
+  "final_text": "Investigation finished.",
+  "error": null,
+  "audit": [
+    {
+      "at": "2026-11-02T13:04:23.158914+00:00",
+      "tool": "service_health",
+      "arguments": {
+        "service": "auth",
+        "lookback_seconds": 600,
+        "bucket_seconds": 30
+      },
+      "ok": true,
+      "result": "{\"service\":\"auth\",\"baseline\":{\"requests_per_s\":4.1,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":53.2,\"bytes_per_response\":290},\"series\":[{\"t\":\"12:59:53\",\"requests_per_s\":4.67,\"server_error_rate\":0.007,\"auth_failure_rate\":0.0,\"p95_ms\":91.0,\"mb_out\":0.05},{\"t\":\"13:00:23\",\"requests_per_s\":5.13,\"server_error_rate\":0.0,\"auth_failure_rate\":0.006,\"p95_ms\":57.4,\"mb_out\":0.04},{\"t\":\"13:00:53\",\"requests_per_s\":5.37,\"server_error_rate\":0.006,\"auth_failure_rate\":0.037,\"p95_ms\":69.2,\"mb_out\":0.05},{\"t\":\"13:01:23\",\"requests_per_s\":6.27,\"server_error_rate\":0.0,\"auth_failure_rate\":0.016,\"p95_ms\":86.4,\"mb_out\":0.05},{\"t\":\"13:01:53\",\"requests_per_s\":6.77,\"server_error_rate\":0.005,\"auth_failure_rate\":0.015,\"p95_ms\":78.0,\"mb_out\":0.06},{\"t\":\"13:02:23\",\"requests_per_s\":5.97,\"server_error_rate\":0.0,\"auth_failure_rate\":0.006,\"p95_ms\":72.8,\"mb_out\":0.06},{\"t\":\"13:02:53\",\"requests_per_s\":5.8,\"server_error_rate\":0.006,\"auth_failure_rate\":0.0,\"p95_ms\":72.6,\"mb_out\":0.05},{\"t\":\"13:03:23\",\"requests_per_s\":4.57,\"server_error_rate\":0.007,\"auth_failure_rate\":0.0,\"p95_ms\":57.6,\"mb_out\":0.04},{\"t\":\"13:03:53\",\"requests_per_s\":6.5,\"server_error_rate\":0.0,\"auth_failure_rate\":0.282,\"p95_ms\":298.4,\"mb_out\":0.05}],\"top_error_messages\":[{\"message\":\"validation failed\",\"count\":8},{\"message\":\"resource not found\",\"count\":8},{\"message\":\"unhandled exception: connection reset by peer\",\"count\":4},{\"message\":\"authentication failed for login=u-00855\",\"count\":2},{\"message\":\"dependency users failed with 500\",\"count\":1}]}"
+    },
+    {
+      "at": "2026-11-02T13:04:23.158914+00:00",
+      "tool": "top_clients",
+      "arguments": {
+        "service": "auth",
+        "lookback_seconds": 120,
+        "rank_by": "errors",
+        "limit": 50
+      },
+      "ok": true,
+      "result": "{\"service\":\"auth\",\"total_requests\":685,\"distinct_clients\":374,\"clients_new_in_window\":197,\"clients\":[{\"ip\":\"31.173.22.30\",\"requests\":6,\"share\":0.0088,\"error_rate\":0.333,\"auth_failures\":1,\"bytes\":1854,\"distinct_users\":2,\"seen_before\":true,\"top_request\":\"POST /v1/sessions\"},{\"ip\":\"46.39.201.211\",\"requests\":3,\"share\":0.0044,\"error_rate\":0.667,\"auth_failures\":2,\"bytes\":1499,\"distinct_users\":3,\"seen_before\":true,\"top_request\":\"POST /v1/sessions\"},{\"ip\":\"77.37.6.47\",\"requests\":2,\"share\":0.0029,\"error_rate\":1.0,\"auth_failures\":2,\"bytes\":409,\"distinct_users\":2,\"seen_before\":true,\"top_request\":\"POST /v1/sessions\"},{\"ip\":\"77.37.87.166\",\"requests\":2,\"share\":0.0029,\"error_rate\":1.0,\"auth_failures\":2,\"bytes\":388,\"distinct_users\":2,\"seen_before\":true,\"top_request\":\"POST /v1/sessions\"},{\"ip\":\"77.37.194.134\",\"requests\":2,\"share\":0.0029,\"error_rate\":1.0,\"auth_failures\":2,\"bytes\":370,\"distinct_users\":2,\"seen_before\":true,\"top_request\":\"POST /v1/sessions\"},{\"ip\":\"37.112.148.168\",\"requests\":2,\"share\":0.0029,\"error_rate\":1.0,\"auth_failures\":2,\"bytes\":488,\"distinct_users\":2,\"seen_before\":false,\"top_request\":\"POST /v1/sessions\"},{\"ip\":\"178.66.189.135\",\"requests\":3,\"share\":0.0044,\"error_rate\":0.333,\"auth_failures\":1,\"bytes\":1020,\"distinct_users\":2,\"seen_before\":true,\"top_request\":\"POST /v1/sessions\"},{\"ip\":\"85.140.55.50\",\"requests\":3,\"share\":0.0044,\"error_rate\":0.333,\"auth_failures\":1,\"bytes\":911,\"distinct_users\":2,\"seen_before\":true,\"top_request\":\"GET /v1/tokens/verify\"},{\"ip\":\"109.252.214.44\",\"requests\":27,\"share\":0.0394,\"error_rate\":0.037,\"auth_failures\":0,\"bytes\":7164,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/tokens/verify\"},{\"ip\":\"93.80.177.252\",\"requests\":2,\"share\":0.0029,\"error_rate\":0.5,\"auth_failures\":1,\"bytes\":550,\"distinct_users\":2,\"seen_before\":true,\"top_request\":\"GET /v1/tokens/verify\"},{\"ip\":\"37.112.24.22\",\"requests\":36,\"share\":0.0526,\"error_rate\":0.028,\"auth_failures\":1,\"bytes\":12311,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/tokens/verify\"},{\"ip\":\"93.80.65.156\",\"requests\":19,\"share\":0.0277,\"error_rate\":0.053,\"auth_failures\":1,\"bytes\":4662,\"distinct_users\":2,\"seen_before\":true,\"top_request\":\"GET /v1/tokens/verify\"},{\"ip\":\"79.139.229.115\",\"requests\":5,\"share\":0.0073,\"error_rate\":0.2,\"auth_failures\":0,\"bytes\":3063,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/tokens/verify\"},{\"ip\":\"109.252.132.173\",\"requests\":5,\"share\":0.0073,\"error_rate\":0.2,\"auth_failures\":0,\"bytes\":1013,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/tokens/verify\"},{\"ip\":\"91.77.141.110\",\"requests\":2,\"share\":0.0029,\"error_rate\":0.5,\"auth_failures\":1,\"bytes\":246,\"distinct_users\":2,\"seen_before\":false,\"top_request\":\"GET /v1/tokens/verify\"},{\"ip\":\"178.66.26.27\",\"requests\":2,\"share\":0.0029,\"error_rate\":0.5,\"auth_failures\":1,\"bytes\":404,\"distinct_users\":2,\"seen_before\":true,\"top_request\":\"GET /v1/tokens/verify\"},{\"ip\":\"95.24.233.98\",\"requests\":4,\"share\":0.0058,\"error_rate\":0.25,\"auth_failures\":1,\"bytes\":569,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/tokens/verify\"},{\"ip\":\"89.113.52.159\",\"requests\":1,\"share\":0.0015,\"error_rate\":1.0,\"auth_failures\":1,\"bytes\":226,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/sessions\"},{\"ip\":\"188.162.42.245\",\"requests\":5,\"share\":0.0073,\"error_rate\":0.2,\"auth_failures\":0,\"bytes\":1209,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"GET /v1/tokens/verify\"},{\"ip\":\"95.24.37.224\",\"requests\":3,\"share\":0.0044,\"error_rate\":0.333,\"auth_failures\":1,\"bytes\":925,\"distinct_users\":2,\"seen_before\":true,\"top_request\":\"GET /v1/tokens/verify\"},{\"ip\":\"95.24.165.101\",\"requests\":3,\"share\":0.0044,\"error_rate\":0.333,\"auth_failures\":1,\"bytes\":492,\"distinct_users\":2,\"seen_before\":true,\"top_request\":\"GET /v1/tokens/verify\"},{\"ip\":\"95.24.191.103\",\"requests\":2,\"share\":0.0029,\"error_rate\":0.5,\"auth_failures\":1,\"bytes\":410,\"distinct_users\":2,\"seen_before\":false,\"top_request\":\"GET /v1/tokens/verify\"},{\"ip\":\"188.162.90.146\",\"requests\":3,\"share\":0.0044,\"error_rate\":0.333,\"a"
+    },
+    {
+      "at": "2026-11-02T13:04:23.158914+00:00",
+      "tool": "call_graph",
+      "arguments": {
+        "lookback_seconds": 300
+      },
+      "ok": true,
+      "result": "{\"edges\":[{\"edge\":\"gateway -> catalog\",\"calls\":2593,\"error_rate\":0.013,\"p95_ms\":70.2,\"mb\":29.8,\"novel_routes\":[]},{\"edge\":\"external -> gateway\",\"calls\":4133,\"error_rate\":0.018,\"p95_ms\":497.8,\"mb\":8.02,\"novel_routes\":[]},{\"edge\":\"gateway -> orders\",\"calls\":853,\"error_rate\":0.019,\"p95_ms\":801.2,\"mb\":3.45,\"novel_routes\":[]},{\"edge\":\"notifications -> egress:198.51.100.25\",\"calls\":377,\"error_rate\":0.016,\"p95_ms\":323.8,\"mb\":0.92,\"novel_routes\":[]},{\"edge\":\"gateway -> users\",\"calls\":425,\"error_rate\":0.007,\"p95_ms\":32.7,\"mb\":0.72,\"novel_routes\":[]},{\"edge\":\"payments -> egress:198.51.100.40\",\"calls\":377,\"error_rate\":0.011,\"p95_ms\":722.5,\"mb\":0.48,\"novel_routes\":[]},{\"edge\":\"gateway -> auth\",\"calls\":1531,\"error_rate\":0.059,\"p95_ms\":88.9,\"mb\":0.45,\"novel_routes\":[]},{\"edge\":\"catalog -> inventory\",\"calls\":988,\"error_rate\":0.013,\"p95_ms\":14.2,\"mb\":0.34,\"novel_routes\":[]},{\"edge\":\"orders -> payments\",\"calls\":377,\"error_rate\":0.016,\"p95_ms\":831.9,\"mb\":0.26,\"novel_routes\":[]},{\"edge\":\"auth -> users\",\"calls\":253,\"error_rate\":0.032,\"p95_ms\":164.9,\"mb\":0.23,\"novel_routes\":[]},{\"edge\":\"notifications -> users\",\"calls\":377,\"error_rate\":0.013,\"p95_ms\":26.3,\"mb\":0.21,\"novel_routes\":[]},{\"edge\":\"orders -> inventory\",\"calls\":377,\"error_rate\":0.005,\"p95_ms\":42.3,\"mb\":0.17,\"novel_routes\":[]},{\"edge\":\"orders -> notifications\",\"calls\":377,\"error_rate\":0.019,\"p95_ms\":349.2,\"mb\":0.13,\"novel_routes\":[]}],\"novel_edges\":0}"
+    },
+    {
+      "at": "2026-11-02T13:04:23.158914+00:00",
+      "tool": "classify_incident",
+      "arguments": {
+        "incident_type": "brute_force",
+        "confidence": 0.85,
+        "affected_services": [
+          "auth"
+        ],
+        "summary": "Heuristic triage of auth: brute_force. auth failure rate 28%; 0 sources with repeated failed logins",
+        "evidence": [
+          "auth failure rate 28%",
+          "0 sources with repeated failed logins"
+        ]
+      },
+      "ok": true,
+      "result": "{\"recorded\":true,\"incident_id\":\"inc-eaf3bf7a\",\"containment_permitted\":[\"block_ips\"],\"always_permitted\":[\"notify_admin\"]}"
+    },
+    {
+      "at": "2026-11-02T13:04:23.158914+00:00",
+      "tool": "notify_admin",
+      "arguments": {
+        "severity": "critical",
+        "title": "brute_force on auth",
+        "summary": "Heuristic triage of auth: brute_force. auth failure rate 28%; 0 sources with repeated failed logins",
+        "recommendations": [
+          "Validate the automated triage."
+        ]
+      },
+      "ok": true,
+      "result": "{\"delivered\":true,\"at\":\"2026-11-02T13:04:23.158914+00:00\"}"
+    }
+  ]
+}

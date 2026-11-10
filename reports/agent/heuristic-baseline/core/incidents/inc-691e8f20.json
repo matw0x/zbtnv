@@ -1,0 +1,159 @@
+{
+  "incident_id": "inc-691e8f20",
+  "model": "heuristic-baseline",
+  "outcome": "completed",
+  "turns": 3,
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cached_input_tokens": 0
+  },
+  "wall_seconds": 0.02,
+  "signal": {
+    "signal_id": "sig-8e82ef627b",
+    "service": "notifications",
+    "window": [
+      "2026-11-02T13:04:10+00:00",
+      "2026-11-02T13:04:20+00:00"
+    ],
+    "anomaly_score": 0.0,
+    "threshold": -0.6365,
+    "correlated_services": [
+      "users"
+    ],
+    "top_deviations": [
+      {
+        "feature": "novel_route_ratio",
+        "value": 0.2857,
+        "baseline_median": 0.0,
+        "robust_z": 28.57
+      },
+      {
+        "feature": "outbound_bytes",
+        "value": 44765083.0,
+        "baseline_median": 33285.0,
+        "robust_z": 16.77
+      },
+      {
+        "feature": "server_error_rate",
+        "value": 0.0667,
+        "baseline_median": 0.0,
+        "robust_z": 6.67
+      }
+    ]
+  },
+  "classification": {
+    "incident_type": "data_exfiltration",
+    "confidence": 0.8,
+    "affected_services": [
+      "notifications"
+    ],
+    "summary": "Heuristic triage of notifications: data_exfiltration. novel edge notifications -> users carrying 33.6 MB; novel edge notifications -> egress:203.0.113.77 carrying 33.38 MB",
+    "evidence": [
+      "novel edge notifications -> users carrying 33.6 MB",
+      "novel edge notifications -> egress:203.0.113.77 carrying 33.38 MB"
+    ]
+  },
+  "revisions": [],
+  "blocked": [
+    "203.0.113.77/32"
+  ],
+  "isolated": [
+    "notifications"
+  ],
+  "denied": [],
+  "notifications": [
+    "critical"
+  ],
+  "final_text": "Investigation finished.",
+  "error": null,
+  "audit": [
+    {
+      "at": "2026-11-02T13:04:22.011244+00:00",
+      "tool": "service_health",
+      "arguments": {
+        "service": "notifications",
+        "lookback_seconds": 600,
+        "bucket_seconds": 30
+      },
+      "ok": true,
+      "result": "{\"service\":\"notifications\",\"baseline\":{\"requests_per_s\":1.1,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":184.7,\"bytes_per_response\":332},\"series\":[{\"t\":\"12:59:52\",\"requests_per_s\":1.13,\"server_error_rate\":0.029,\"auth_failure_rate\":0.0,\"p95_ms\":213.1,\"mb_out\":0.01},{\"t\":\"13:00:22\",\"requests_per_s\":1.5,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":482.5,\"mb_out\":0.02},{\"t\":\"13:00:52\",\"requests_per_s\":1.77,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":354.6,\"mb_out\":0.02},{\"t\":\"13:01:22\",\"requests_per_s\":1.4,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":334.8,\"mb_out\":0.01},{\"t\":\"13:01:52\",\"requests_per_s\":1.53,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":2235.9,\"mb_out\":0.02},{\"t\":\"13:02:22\",\"requests_per_s\":1.43,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":501.6,\"mb_out\":0.02},{\"t\":\"13:02:52\",\"requests_per_s\":1.63,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":297.0,\"mb_out\":0.01},{\"t\":\"13:03:22\",\"requests_per_s\":1.37,\"server_error_rate\":0.0,\"auth_failure_rate\":0.0,\"p95_ms\":390.6,\"mb_out\":0.01},{\"t\":\"13:03:52\",\"requests_per_s\":1.5,\"server_error_rate\":0.044,\"auth_failure_rate\":0.0,\"p95_ms\":207.3,\"mb_out\":0.02}],\"top_error_messages\":[{\"message\":\"dependency users failed with 500\",\"count\":2},{\"message\":\"unhandled exception: connection reset by peer\",\"count\":1},{\"message\":\"validation failed\",\"count\":1},{\"message\":\"resource not found\",\"count\":1}]}"
+    },
+    {
+      "at": "2026-11-02T13:04:22.011244+00:00",
+      "tool": "top_clients",
+      "arguments": {
+        "service": "notifications",
+        "lookback_seconds": 120,
+        "rank_by": "errors",
+        "limit": 50
+      },
+      "ok": true,
+      "result": "{\"service\":\"notifications\",\"total_requests\":178,\"distinct_clients\":118,\"clients_new_in_window\":83,\"clients\":[{\"ip\":\"46.39.156.4\",\"requests\":4,\"share\":0.0225,\"error_rate\":0.25,\"auth_failures\":0,\"bytes\":629,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"91.77.122.153\",\"requests\":3,\"share\":0.0169,\"error_rate\":0.333,\"auth_failures\":0,\"bytes\":603,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"176.59.48.110\",\"requests\":1,\"share\":0.0056,\"error_rate\":1.0,\"auth_failures\":0,\"bytes\":131,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"212.164.86.137\",\"requests\":1,\"share\":0.0056,\"error_rate\":1.0,\"auth_failures\":0,\"bytes\":198,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"85.140.181.42\",\"requests\":1,\"share\":0.0056,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":146,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"89.113.221.18\",\"requests\":1,\"share\":0.0056,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":474,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"93.80.71.252\",\"requests\":1,\"share\":0.0056,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":369,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"37.112.135.24\",\"requests\":1,\"share\":0.0056,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":155,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"31.173.123.242\",\"requests\":1,\"share\":0.0056,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":146,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"89.113.152.140\",\"requests\":9,\"share\":0.0506,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":2603,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"79.139.179.221\",\"requests\":2,\"share\":0.0112,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":656,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"85.140.189.21\",\"requests\":1,\"share\":0.0056,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":305,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"37.112.251.40\",\"requests\":1,\"share\":0.0056,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":299,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"212.164.139.215\",\"requests\":4,\"share\":0.0225,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":1398,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"78.106.223.238\",\"requests\":2,\"share\":0.0112,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":600,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"46.39.41.195\",\"requests\":2,\"share\":0.0112,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":604,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"77.37.44.129\",\"requests\":1,\"share\":0.0056,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":516,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"178.66.102.187\",\"requests\":1,\"share\":0.0056,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":723,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"85.140.223.65\",\"requests\":2,\"share\":0.0112,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":734,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"176.59.63.219\",\"requests\":2,\"share\":0.0112,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":705,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"176.59.166.144\",\"requests\":1,\"share\":0.0056,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":174,\"distinct_users\":1,\"seen_before\":false,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"85.140.99.122\",\"requests\":1,\"share\":0.0056,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":259,\"distinct_users\":1,\"seen_before\":true,\"top_request\":\"POST /v1/messages\"},{\"ip\":\"176.59.165.222\",\"requests\":1,\"share\":0.0056,\"error_rate\":0.0,\"auth_failures\":0,\"bytes\":361,\"distinct_users\":1,\"seen_before"
+    },
+    {
+      "at": "2026-11-02T13:04:22.011244+00:00",
+      "tool": "call_graph",
+      "arguments": {
+        "lookback_seconds": 300
+      },
+      "ok": true,
+      "result": "{\"edges\":[{\"edge\":\"notifications -> users\",\"calls\":411,\"error_rate\":0.019,\"p95_ms\":25.5,\"mb\":33.6,\"novel_routes\":[\"GET /internal/admin/users\",\"GET /v1/users/export\"]},{\"edge\":\"notifications -> egress:203.0.113.77\",\"calls\":13,\"error_rate\":0.0,\"p95_ms\":1629.6,\"mb\":33.38,\"novel_routes\":[\"PUT /upload\"]},{\"edge\":\"gateway -> catalog\",\"calls\":2412,\"error_rate\":0.011,\"p95_ms\":62.4,\"mb\":27.17,\"novel_routes\":[]},{\"edge\":\"external -> gateway\",\"calls\":3880,\"error_rate\":0.019,\"p95_ms\":540.5,\"mb\":7.67,\"novel_routes\":[]},{\"edge\":\"gateway -> orders\",\"calls\":862,\"error_rate\":0.019,\"p95_ms\":912.7,\"mb\":3.41,\"novel_routes\":[]},{\"edge\":\"notifications -> egress:198.51.100.25\",\"calls\":397,\"error_rate\":0.01,\"p95_ms\":373.9,\"mb\":0.98,\"novel_routes\":[]},{\"edge\":\"gateway -> users\",\"calls\":384,\"error_rate\":0.01,\"p95_ms\":19.4,\"mb\":0.67,\"novel_routes\":[]},{\"edge\":\"payments -> egress:198.51.100.40\",\"calls\":398,\"error_rate\":0.005,\"p95_ms\":736.8,\"mb\":0.51,\"novel_routes\":[]},{\"edge\":\"gateway -> auth\",\"calls\":1461,\"error_rate\":0.027,\"p95_ms\":64.3,\"mb\":0.43,\"novel_routes\":[]},{\"edge\":\"catalog -> inventory\",\"calls\":954,\"error_rate\":0.019,\"p95_ms\":13.2,\"mb\":0.32,\"novel_routes\":[]},{\"edge\":\"orders -> payments\",\"calls\":398,\"error_rate\":0.015,\"p95_ms\":882.5,\"mb\":0.27,\"novel_routes\":[]},{\"edge\":\"auth -> users\",\"calls\":214,\"error_rate\":0.028,\"p95_ms\":19.2,\"mb\":0.21,\"novel_routes\":[]},{\"edge\":\"orders -> inventory\",\"calls\":398,\"error_rate\":0.018,\"p95_ms\":38.1,\"mb\":0.17,\"novel_routes\":[]},{\"edge\":\"orders -> notifications\",\"calls\":398,\"error_rate\":0.013,\"p95_ms\":404.0,\"mb\":0.14,\"novel_routes\":[]}],\"novel_edges\":2}"
+    },
+    {
+      "at": "2026-11-02T13:04:22.011244+00:00",
+      "tool": "classify_incident",
+      "arguments": {
+        "incident_type": "data_exfiltration",
+        "confidence": 0.8,
+        "affected_services": [
+          "notifications"
+        ],
+        "summary": "Heuristic triage of notifications: data_exfiltration. novel edge notifications -> users carrying 33.6 MB; novel edge notifications -> egress:203.0.113.77 carrying 33.38 MB",
+        "evidence": [
+          "novel edge notifications -> users carrying 33.6 MB",
+          "novel edge notifications -> egress:203.0.113.77 carrying 33.38 MB"
+        ]
+      },
+      "ok": true,
+      "result": "{\"recorded\":true,\"incident_id\":\"inc-691e8f20\",\"containment_permitted\":[\"block_ips\",\"isolate_service\"],\"always_permitted\":[\"notify_admin\"]}"
+    },
+    {
+      "at": "2026-11-02T13:04:22.011244+00:00",
+      "tool": "block_ips",
+      "arguments": {
+        "targets": [
+          "203.0.113.77"
+        ],
+        "reason": "exfiltration destination",
+        "ttl_minutes": 1440
+      },
+      "ok": true,
+      "result": "{\"blocked\":1,\"expires_at\":\"2026-11-03T13:04:22.011244+00:00\",\"sample_commands\":[\"nft add element inet filter blocklist { 203.0.113.77/32 timeout 86400s }\"]}"
+    },
+    {
+      "at": "2026-11-02T13:04:22.011244+00:00",
+      "tool": "isolate_service",
+      "arguments": {
+        "service": "notifications",
+        "reason": "workload exfiltrating user data"
+      },
+      "ok": true,
+      "result": "{\"isolated\":\"notifications\",\"applied_manifest\":\"apiVersion: networking.k8s.io/v1\\nkind: NetworkPolicy\\nmetadata:\\n  name: quarantine-notifications\\n  namespace: shop\\n  labels: {meshguard/incident: inc-691e8f20}\\nspec:\\n  podSelector: {matchLabels: {app: notifications}}\\n  policyTypes: [Ingress, Egress]\\n  ingress:\\n    - from: [{namespaceSelector: {matchLabels: {name: observability}}}]\\n  egress: []\\n\"}"
+    },
+    {
+      "at": "2026-11-02T13:04:22.011244+00:00",
+      "tool": "notify_admin",
+      "arguments": {
+        "severity": "critical",
+        "title": "data_exfiltration on notifications",
+        "summary": "Heuristic triage of notifications: data_exfiltration. novel edge notifications -> users carrying 33.6 MB; novel edge notifications -> egress:203.0.113.77 carrying 33.38 MB",
+        "recommendations": [
+          "Validate the automated triage."
+        ]
+      },
+      "ok": true,
+      "result": "{\"delivered\":true,\"at\":\"2026-11-02T13:04:22.011244+00:00\"}"
+    }
+  ]
+}
